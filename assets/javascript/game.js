@@ -9,7 +9,10 @@ var yasuo = {
     def: function() {
         var resistance = 10;
     },
+    img: url()
 }
 
 // Set global variables
 var eachAtk = 0;
+
+//
