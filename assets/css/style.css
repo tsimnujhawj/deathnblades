@@ -1,20 +1,57 @@
-h1 {
-    text-align: center;
-    font-size: 30px;
+body {
+    width: 960px;
+    margin: 0 auto;
+    background-color: #984B43;
+    background-image:  url("../images/zed_white.png"), url("../images/diana.png"), url("../images/moulin_@2X.png");
+    background-repeat: no-repeat, no-repeat, repeat;
+    background-position: left bottom, top right, center center;
+    /* background: url("../images/yasuo_nightbringer.png"); */
 }
 
-container {
-    width: 960px;
+h1 {
+    text-align: center;
 }
 
 .boxSec {
     background-color: #18121E;
     color: #EAC67A;
-    border: 1px solid #233237;
+    border: 5px solid #233237;
     padding: 30px;
-    margin: .5px;
+    border-radius: 10px;
+    margin: 5px auto;
+    height: 160px;
+}
+
+.boxSecChar {
+    background-color: #18121E;
+    color: #EAC67A;
+    border: 5px solid #233237;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 5px auto;
+    height: 400px;
 }
 
 button {
     text-align: center;
+}
+
+.container {
+    border: 5px solid #EAC67A;
+    margin: 20px auto;
+    background-color: #233237;
+}
+
+.storyContain {
+    background-color: #18121E;
+    color: #EAC67A;
+    border: 5px double #984B43;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: 5px;
+}
+
+.characterImage {
+
 }
