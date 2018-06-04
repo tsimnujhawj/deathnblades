@@ -11,6 +11,12 @@ h1 {
     text-align: center;
 }
 
+#messageBox {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
 .boxSec {
     background-color: #18121E;
     color: #EAC67A;
@@ -34,6 +40,16 @@ button {
     padding: 15px;
     text-align: center;
     height: 150px;
+}
+
+.messageContain {
+    background-color: #18121E;
+    color: #EAC67A;
+    border: 3px double #984B43;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+    height: 80px;
 }
 
 .characterSelect img {

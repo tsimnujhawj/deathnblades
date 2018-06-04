@@ -9,6 +9,7 @@ var enemy;
 // Set character objects
 
 var yasuo = {
+    name: "Yasuo",
     hp: 200,
     atk: function() {
         var atkDmg = 10 * eachAtk;
@@ -27,6 +28,7 @@ var yasuo = {
 }
 
 var zed = {
+    name: "Zed",
     hp: 180,
     atk: function() {
         var atkDmg = 12 * eachAtk;
@@ -45,6 +47,7 @@ var zed = {
 }
 
 var link = {
+    name: "Link",
     hp: 220,
     atk: function() {
         var atkDmg = 5 * eachAtk;
@@ -63,6 +66,7 @@ var link = {
 }
 
 var cloud = {
+    name: "Cloud",
     hp: 190,
     atk: function() {
         var atkDmg = 7 * eachAtk;
@@ -83,33 +87,46 @@ var cloud = {
 
 // CONSOLE.LOG TEST ///////////////////////
 
-player = zed;
-enemy = link;
+// enemy = link;
 
-$("#playerImage").append("<img src=" + player.imgPlayer + ">");
-$("#enemyImage").append("<img src=" + enemy.imgEnemy + ">");
+// $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
 
 //////////////////////////////////////////
 
 
 // Set characters for player to choose
-var selectLink = $("#link").append("<img src=" + link.icon + ">");
-var selectZed = $("#zed").append("<img src=" + zed.icon + ">");
-var selectCloud = $("#cloud").append("<img src=" + cloud.icon + ">");
-var selectYasuo = $("#yasuo").append("<img src=" + yasuo.icon + ">");
+var selectLink = $("#link").html("<img src=" + link.icon + ">");
+var selectZed = $("#zed").html("<img src=" + zed.icon + ">");
+var selectCloud = $("#cloud").html("<img src=" + cloud.icon + ">");
+var selectYasuo = $("#yasuo").html("<img src=" + yasuo.icon + ">");
 
 // Add event listener to characters
 $(selectLink).on("click", function() {
-    alert("You picked Link!");
+    player = link;
+    $("#playerImage").html("<img src=" + player.imgPlayer + ">");
+    $("#charBox").hide();
+    $("#messageBox").html("You have chosen " + player.name + "!");
 });
+
 $(selectZed).on("click", function() {
-    alert("You picked Zed!");
+    player = zed;
+    $("#playerImage").html("<img src=" + player.imgPlayer + ">");
+    $("#charBox").hide();
+    $("#messageBox").html("You have chosen " + player.name + "!");
 });
+
 $(selectCloud).on("click", function() {
-    alert("You picked Cloud!");
+    player = cloud;
+    $("#playerImage").html("<img src=" + player.imgPlayer + ">");
+    $("#charBox").hide();
+    $("#messageBox").html("You have chosen " + player.name + "!");
 });
+
 $(selectYasuo).on("click", function() {
-    alert("You picked Yasuo!");
+    player = yasuo;
+    $("#playerImage").html("<img src=" + player.imgPlayer + ">");
+    $("#charBox").hide();
+    $("#messageBox").html("You have chosen " + player.name + "!");
 });
 
 var oldData = $("#storyBox").html();
