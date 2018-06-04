@@ -103,6 +103,8 @@ var selectCloud = $("#cloud").html("<img src=" + cloud.icon + ">");
 var selectYasuo = $("#yasuo").html("<img src=" + yasuo.icon + ">");
 
 // Add event listener to characters
+// TODO: remove #charBox hide and hide each individual icon?
+// TODO: show chosen character icon with stats in #charBox?
 $(selectLink).on("click", function() {
     player = link;
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
