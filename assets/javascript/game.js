@@ -4,6 +4,7 @@ $(document).ready(function() {
 // PLAYER VARIABLES
 var eachAtk = 1;
 var player;
+var enemy;
 
 // Set character objects
 
@@ -66,14 +67,17 @@ var cloud = {
 
 // CONSOLE.LOG TEST ///////////////////////
 
-var player = cloud;
+player = zed;
+enemy = link;
 
 $("#playerImage").append("<img src=" + player.imgPlayer + ">");
+$("#enemyImage").append("<img src=" + enemy.imgEnemy + ">");
 
 //////////////////////////////////////////
 
 
 // Set characters for player to choose
+
 // Add event listener to characters
 // If player chooses character x then appendTo player box
 // then appendTo the other characters to enemy box
