@@ -12,7 +12,7 @@ var enemy;
 
 var yasuo = {
     name: "Yasuo",
-    hp: 200,
+    hp: 190,
     atk: function() {
         var atkDmg = 10 * eachAtk;
         return atkDmg;
@@ -52,7 +52,7 @@ var link = {
     name: "Link",
     hp: 220,
     atk: function() {
-        var atkDmg = 5 * eachAtk;
+        var atkDmg = 6 * eachAtk;
         return atkDmg;
     },
     def: function() {
@@ -69,7 +69,7 @@ var link = {
 
 var cloud = {
     name: "Cloud",
-    hp: 190,
+    hp: 200,
     atk: function() {
         var atkDmg = 7 * eachAtk;
         return atkDmg;
@@ -84,6 +84,44 @@ var cloud = {
     icon: "assets/images/cloud/cloudSquare.jpg",
 
     bio: "Pastrami porchetta ham short ribs, frankfurter chicken shoulder ball tip beef capicola rump pork chop chuck. Picanha andouille short loin, strip steak meatball filet mignon hamburger beef sausage pork belly salami tri-tip pastrami venison. Flank hamburger rump fatback beef ribs ground round sirloin pork loin shank capicola prosciutto salami ball tip pastrami. Cow pig short loin prosciutto, shankle sirloin pork chop frankfurter pork. Ground round boudin hamburger, t-bone meatball sirloin chuck pig picanha burgdoggen tenderloin shankle cupim turducken fatback.",
+}
+
+var twob = {
+    name: "2B",
+    hp: 155,
+    atk: function() {
+        var atkDmg = 14 * eachAtk;
+        return atkDmg;
+    },
+    def: function() {
+        var resistance = 5;
+    },
+    imgPlayer: "assets/images/2b/2b_1.gif",
+    
+    imgEnemy: "assets/images/2b/2b_2.gif",
+
+    icon: "assets/images/2b/2bSquare.png",
+
+    bio: "Shankle hamburger tri-tip, pancetta brisket meatloaf beef ribs shoulder venison tail shank pork belly rump short ribs. Jerky kielbasa chuck tongue corned beef doner strip steak porchetta alcatra beef ribs. Chicken leberkas bacon spare ribs, ball tip hamburger jerky frankfurter. Short loin cow ham hamburger chicken picanha porchetta ball tip corned beef meatball spare ribs bresaola meatloaf ham hock short ribs. Pork belly turducken turkey prosciutto picanha porchetta. Filet mignon shank tail pork loin, capicola sausage bacon sirloin alcatra pork buffalo t-bone kevin pancetta.",
+}
+
+var ekko = {
+    name: "Ekko",
+    hp: 180,
+    atk: function() {
+        var atkDmg = 9 * eachAtk;
+        return atkDmg;
+    },
+    def: function() {
+        var resistance = 8;
+    },
+    imgPlayer: "assets/images/ekko/ekko_1.gif",
+    
+    imgEnemy: "assets/images/ekko/ekko_2.gif",
+
+    icon: "assets/images/ekko/ekkoSquare.png",
+
+    bio: "Meatball bresaola shank, ham ham hock rump pastrami shankle ground round filet mignon pork. Capicola brisket hamburger, buffalo tenderloin pancetta landjaeger drumstick. Turkey shank ball tip leberkas corned beef, bacon sausage beef t-bone shoulder porchetta rump capicola. Turducken biltong tenderloin sirloin ham. Leberkas pork belly ham hock, ribeye swine beef ribs cupim ham.",
 }
 
 
@@ -101,6 +139,8 @@ var selectLink = $("#link").html("<img src=" + link.icon + ">");
 var selectZed = $("#zed").html("<img src=" + zed.icon + ">");
 var selectCloud = $("#cloud").html("<img src=" + cloud.icon + ">");
 var selectYasuo = $("#yasuo").html("<img src=" + yasuo.icon + ">");
+var selectTwob = $("#twob").html("<img src=" + twob.icon + ">");
+var selectEkko = $("#ekko").html("<img src=" + ekko.icon + ">");
 
 // Add event listener to characters
 // TODO: remove #charBox hide and hide each individual icon?
@@ -113,6 +153,8 @@ $(selectLink).on("click", function() {
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
+    $("#enemyBox").append("<img src=" + twob.icon + ">");
+    $("#enemyBox").append("<img src=" + ekko.icon + ">");
 });
 
 $(selectZed).on("click", function() {
@@ -123,6 +165,8 @@ $(selectZed).on("click", function() {
     $("#enemyBox").append("<img src=" + link.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
+    $("#enemyBox").append("<img src=" + twob.icon + ">");
+    $("#enemyBox").append("<img src=" + ekko.icon + ">");
 });
 
 $(selectCloud).on("click", function() {
@@ -133,6 +177,8 @@ $(selectCloud).on("click", function() {
     $("#enemyBox").append("<img src=" + link.icon + ">");
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
+    $("#enemyBox").append("<img src=" + twob.icon + ">");
+    $("#enemyBox").append("<img src=" + ekko.icon + ">");
 });
 
 $(selectYasuo).on("click", function() {
@@ -143,6 +189,32 @@ $(selectYasuo).on("click", function() {
     $("#enemyBox").append("<img src=" + link.icon + ">");
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
+    $("#enemyBox").append("<img src=" + twob.icon + ">");
+    $("#enemyBox").append("<img src=" + ekko.icon + ">");
+});
+
+$(selectTwob).on("click", function() {
+    player = twob;
+    $("#playerImage").html("<img src=" + player.imgPlayer + ">");
+    $("#charBox").hide();
+    $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#enemyBox").append("<img src=" + link.icon + ">");
+    $("#enemyBox").append("<img src=" + zed.icon + ">");
+    $("#enemyBox").append("<img src=" + cloud.icon + ">");
+    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
+    $("#enemyBox").append("<img src=" + ekko.icon + ">");
+});
+
+$(selectEkko).on("click", function() {
+    player = ekko;
+    $("#playerImage").html("<img src=" + player.imgPlayer + ">");
+    $("#charBox").hide();
+    $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#enemyBox").append("<img src=" + link.icon + ">");
+    $("#enemyBox").append("<img src=" + zed.icon + ">");
+    $("#enemyBox").append("<img src=" + cloud.icon + ">");
+    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
+    $("#enemyBox").append("<img src=" + twob.icon + ">");
 });
 
 // Add hover on characters to show stats and story
@@ -180,6 +252,26 @@ $(selectYasuo).hover(
     function() {
     timeout = setTimeout(function() {
     $("#storyBox").html(yasuo.bio);}, 100);
+    },
+    function() {
+        clearTimeout(timeout);
+        $("#storyBox").html(oldData);
+});
+
+$(selectTwob).hover(
+    function() {
+    timeout = setTimeout(function() {
+    $("#storyBox").html(twob.bio);}, 100);
+    },
+    function() {
+        clearTimeout(timeout);
+        $("#storyBox").html(oldData);
+});
+
+$(selectEkko).hover(
+    function() {
+    timeout = setTimeout(function() {
+    $("#storyBox").html(ekko.bio);}, 100);
     },
     function() {
         clearTimeout(timeout);

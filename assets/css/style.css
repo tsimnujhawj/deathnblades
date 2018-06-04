@@ -19,7 +19,7 @@ h1 {
 
 .buttonRow p {
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -53,9 +53,9 @@ button {
     color: #EAC67A;
     border: 3px double #984B43;
     border-radius: 5px;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
-    height: 85px;
+    height: 70px;
 }
 
 .characterSelect img {
