@@ -21,7 +21,9 @@ var yasuo = {
     
     imgEnemy: "assets/images/yasuo/yasuo_2.gif",
 
-    icon: "assets/images/yasuo/yasuoSquare.png"
+    icon: "assets/images/yasuo/yasuoSquare.png",
+
+    bio: "Spicy jalapeno bacon ipsum dolor amet t-bone tail hamburger pancetta. Buffalo burgdoggen turkey, turducken pastrami alcatra porchetta jowl. Short loin cupim beef ribs porchetta kielbasa filet mignon kevin salami t-bone. Tail turducken shoulder pancetta. Jowl cupim pancetta ribeye kevin swine beef spare ribs capicola tenderloin bacon frankfurter prosciutto fatback meatball. Short loin porchetta kevin, tongue tri-tip bresaola swine t-bone salami. Corned beef fatback sirloin pork loin shank meatloaf pastrami pork belly filet mignon bacon alcatra beef cupim pork.",
 }
 
 var zed = {
@@ -38,6 +40,8 @@ var zed = {
     imgEnemy: "assets/images/zed/zed_2.gif",
 
     icon: "assets/images/zed/zedSquare.png",
+
+    bio: "Bresaola capicola strip steak salami corned beef, jerky spare ribs. Tongue shankle andouille, biltong brisket ham hock venison spare ribs turkey drumstick pork belly t-bone strip steak kielbasa. Filet mignon ground round tenderloin jowl sirloin tri-tip spare ribs meatloaf tail picanha. Spare ribs ham ground round pork belly flank, kielbasa tenderloin pastrami cow. Flank short ribs andouille porchetta, bacon buffalo jowl. Chicken tri-tip brisket hamburger, capicola frankfurter t-bone andouille.",
 }
 
 var link = {
@@ -72,6 +76,8 @@ var cloud = {
     imgEnemy: "assets/images/cloud/cloud_2.gif",
 
     icon: "assets/images/cloud/cloudSquare.jpg",
+
+    bio: "Pastrami porchetta ham short ribs, frankfurter chicken shoulder ball tip beef capicola rump pork chop chuck. Picanha andouille short loin, strip steak meatball filet mignon hamburger beef sausage pork belly salami tri-tip pastrami venison. Flank hamburger rump fatback beef ribs ground round sirloin pork loin shank capicola prosciutto salami ball tip pastrami. Cow pig short loin prosciutto, shankle sirloin pork chop frankfurter pork. Ground round boudin hamburger, t-bone meatball sirloin chuck pig picanha burgdoggen tenderloin shankle cupim turducken fatback.",
 }
 
 
@@ -93,10 +99,10 @@ var selectCloud = $("#cloud").append("<img src=" + cloud.icon + ">");
 var selectYasuo = $("#yasuo").append("<img src=" + yasuo.icon + ">");
 
 // Add event listener to characters
-$(selectLink).click(function() {
+$(selectLink).on("click", function() {
     alert("You picked Link!");
 });
-$(selectZed).click(function() {
+$(selectZed).on("click", function() {
     alert("You picked Zed!");
 });
 $(selectCloud).on("click", function() {
@@ -119,14 +125,34 @@ $(selectLink).hover(
         $("#storyBox").html(oldData);
 });
 
-$(selectZed).click(function() {
-    alert("You picked Zed!");
+$(selectZed).hover(
+    function() {
+    timeout = setTimeout(function() {
+    $("#storyBox").html(zed.bio);}, 100);
+    },
+    function() {
+        clearTimeout(timeout);
+        $("#storyBox").html(oldData);
 });
-$(selectCloud).on("click", function() {
-    alert("You picked Cloud!");
+
+$(selectCloud).hover(
+    function() {
+    timeout = setTimeout(function() {
+    $("#storyBox").html(cloud.bio);}, 100);
+    },
+    function() {
+        clearTimeout(timeout);
+        $("#storyBox").html(oldData);
 });
-$(selectYasuo).on("click", function() {
-    alert("You picked Yasuo!");
+
+$(selectYasuo).hover(
+    function() {
+    timeout = setTimeout(function() {
+    $("#storyBox").html(yasuo.bio);}, 100);
+    },
+    function() {
+        clearTimeout(timeout);
+        $("#storyBox").html(oldData);
 });
 
 // If player chooses character x then appendTo player box
