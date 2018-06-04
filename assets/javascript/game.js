@@ -1,5 +1,7 @@
 $(document).ready(function() {
 // Set global variables
+var oldData = $("#storyBox").html();
+var timeout;
 
 // PLAYER VARIABLES
 var eachAtk = 1;
@@ -106,6 +108,9 @@ $(selectLink).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#enemyBox").append("<img src=" + zed.icon + ">");
+    $("#enemyBox").append("<img src=" + cloud.icon + ">");
+    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
 });
 
 $(selectZed).on("click", function() {
@@ -113,6 +118,9 @@ $(selectZed).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#enemyBox").append("<img src=" + link.icon + ">");
+    $("#enemyBox").append("<img src=" + cloud.icon + ">");
+    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
 });
 
 $(selectCloud).on("click", function() {
@@ -120,6 +128,9 @@ $(selectCloud).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#enemyBox").append("<img src=" + link.icon + ">");
+    $("#enemyBox").append("<img src=" + zed.icon + ">");
+    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
 });
 
 $(selectYasuo).on("click", function() {
@@ -127,10 +138,11 @@ $(selectYasuo).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#enemyBox").append("<img src=" + link.icon + ">");
+    $("#enemyBox").append("<img src=" + zed.icon + ">");
+    $("#enemyBox").append("<img src=" + cloud.icon + ">");
 });
 
-var oldData = $("#storyBox").html();
-var timeout;
 // Add hover on characters to show stats and story
 $(selectLink).hover(
     function() {
@@ -173,6 +185,11 @@ $(selectYasuo).hover(
 });
 
 // If player chooses character x then appendTo player box
+// if (player === link) {
+//     $("#enemyBox").html("<img src=" + zed.icon + ">");
+//     $("#enemyBox").html("<img src=" + cloud.icon + ">");
+//     $("#enemyBox").html("<img src=" + yasuo.icon + ">");
+// }
 // then appendTo the other characters to enemy box
 // then function an image rotation for enemy characters
 // disable event listener to player's character

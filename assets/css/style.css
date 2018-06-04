@@ -17,6 +17,12 @@ h1 {
     font-weight: bold;
 }
 
+.buttonRow p {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
 .boxSec {
     background-color: #18121E;
     color: #EAC67A;
@@ -49,7 +55,7 @@ button {
     border-radius: 5px;
     padding: 15px;
     text-align: center;
-    height: 80px;
+    height: 85px;
 }
 
 .characterSelect img {
@@ -58,6 +64,14 @@ button {
     margin: 5px auto;
     display: inline-block;
 }
+
+#enemyBox img {
+    border: 1px solid #EAC67A;
+    border-radius: 3px;
+    margin: 10px;
+    display: inline-block;
+}
+
 
 .boxSecSel {
     border: 3px double #984B43;
