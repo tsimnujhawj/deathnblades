@@ -1,3 +1,9 @@
+$(document).ready(function() {
+// Set global variables
+
+// PLAYER VARIABLES
+var eachAtk = 1;
+var player;
 
 // Set character objects
 
@@ -5,36 +11,28 @@ var yasuo = {
     hp: 200,
     atk: function() {
         var atkDmg = 10 * eachAtk;
+        return atkDmg;
     },
     def: function() {
         var resistance = 5;
     },
-    imgPlayer: function() {
-        var yasuoPlayer = Image();
-    yasuoPlayer.src = "assets/images/yasuo/yasuo_1.gif"
-    },
-    imgEnemy: function() {
-        var yasuoEnemy = Image();
-    yasuoPlayer.src = "assets/images/yasuo/yasuo_2.gif"
-    }
+    imgPlayer: "assets/images/yasuo/yasuo_1.gif",
+    
+    imgEnemy: "assets/images/yasuo/yasuo_2.gif",
 }
 
 var zed = {
     hp: 180,
     atk: function() {
         var atkDmg = 12 * eachAtk;
+        return atkDmg;
     },
     def: function() {
         var resistance = 4;
     },
-    imgPlayer: function() {
-        var zedPlayer = Image();
-        zedPlayer.src = "assets/images/zed/zed_1.gif"
-    },
-    imgEnemy: function() {
-        var zedEnemy = Image();
-        zedPlayer.src = "assets/images/zed/zed_2.gif"
-    }
+    imgPlayer: "assets/images/zed/zed_1.gif",
+    
+    imgEnemy: "assets/images/zed/zed_2.gif",
 }
 
 var link = {
@@ -46,42 +44,31 @@ var link = {
     def: function() {
         var resistance = 10;
     },
-    imgPlayer: function() {
-        var linkPlayer = Image();
-        linkPlayer.src = "assets/images/link/link_1.gif"
-    },
-    imgEnemy: function() {
-        var linkEnemy = Image();
-        linkPlayer.src = "assets/images/link/link_2.gif"
-    }
+    imgPlayer: "assets/images/link/link_1.gif",
+    
+    imgEnemy: "assets/images/link/link_2.gif",
 }
 
 var cloud = {
     hp: 190,
     atk: function() {
         var atkDmg = 7 * eachAtk;
+        return atkDmg;
     },
     def: function() {
         var resistance = 7;
     },
-    imgPlayer: function() {
-        var cloudPlayer = Image();
-        cloudPlayer.src = "assets/images/cloud/cloud_1.gif"
-    },
-    imgEnemy: function() {
-        var cloudEnemy = Image();
-        cloudPlayer.src = "assets/images/cloud/cloud_2.gif"
-    }
+    imgPlayer: "assets/images/cloud/cloud_1.gif",
+
+    imgEnemy: "assets/images/cloud/cloud_2.gif",
 }
 
-// Set global variables
-var eachAtk = 1;
 
+// CONSOLE.LOG TEST ///////////////////////
 
-// CONSOLE.LOG TEST
-var playerDmg = yasuo.atk;
-console.log(yasuo.atk);
+var player = cloud;
 
+$("#playerImage").append("<img src=" + player.imgPlayer + ">");
 
 //////////////////////////////////////////
 
@@ -113,3 +100,4 @@ console.log(yasuo.atk);
 // if player loses, print death narration and print press play again
 
 
+}); // DOCUMENT READY CLOSING
