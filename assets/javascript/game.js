@@ -20,6 +20,8 @@ var yasuo = {
     imgPlayer: "assets/images/yasuo/yasuo_1.gif",
     
     imgEnemy: "assets/images/yasuo/yasuo_2.gif",
+
+    icon: "assets/images/yasuo/yasuoSquare.png"
 }
 
 var zed = {
@@ -34,6 +36,8 @@ var zed = {
     imgPlayer: "assets/images/zed/zed_1.gif",
     
     imgEnemy: "assets/images/zed/zed_2.gif",
+
+    icon: "assets/images/zed/zedSquare.png",
 }
 
 var link = {
@@ -48,6 +52,8 @@ var link = {
     imgPlayer: "assets/images/link/link_1.gif",
     
     imgEnemy: "assets/images/link/link_2.gif",
+
+    icon: "assets/images/link/linkSquare.png",
 }
 
 var cloud = {
@@ -62,6 +68,8 @@ var cloud = {
     imgPlayer: "assets/images/cloud/cloud_1.gif",
 
     imgEnemy: "assets/images/cloud/cloud_2.gif",
+
+    icon: "assets/images/cloud/cloudSquare.jpg",
 }
 
 
@@ -77,8 +85,48 @@ $("#enemyImage").append("<img src=" + enemy.imgEnemy + ">");
 
 
 // Set characters for player to choose
+var selectLink = $("#link").append("<img src=" + link.icon + ">");
+var selectZed = $("#zed").append("<img src=" + zed.icon + ">");
+var selectCloud = $("#cloud").append("<img src=" + cloud.icon + ">");
+var selectYasuo = $("#yasuo").append("<img src=" + yasuo.icon + ">");
 
 // Add event listener to characters
+$(selectLink).click(function() {
+    alert("You picked Link!");
+});
+$(selectZed).click(function() {
+    alert("You picked Zed!");
+});
+$(selectCloud).on("click", function() {
+    alert("You picked Cloud!");
+});
+$(selectYasuo).on("click", function() {
+    alert("You picked Yasuo!");
+});
+
+var oldData = $("#storyBox").html();
+var timeout;
+// Add hover on characters to show stats and story
+$(selectLink).hover(
+    function() {
+    timeout = setTimeout(function() {
+    $("#storyBox").html("Test");}, 100);
+    },
+    function() {
+        clearTimeout(timeout);
+        $("#storyBox").html(oldData);
+});
+
+$(selectZed).click(function() {
+    alert("You picked Zed!");
+});
+$(selectCloud).on("click", function() {
+    alert("You picked Cloud!");
+});
+$(selectYasuo).on("click", function() {
+    alert("You picked Yasuo!");
+});
+
 // If player chooses character x then appendTo player box
 // then appendTo the other characters to enemy box
 // then function an image rotation for enemy characters
