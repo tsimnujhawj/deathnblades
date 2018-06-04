@@ -54,6 +54,8 @@ var link = {
     imgEnemy: "assets/images/link/link_2.gif",
 
     icon: "assets/images/link/linkSquare.png",
+
+    bio: "Tempor ground round kielbasa, ball tip ut in sed. Capicola ut boudin eiusmod anim spare ribs sirloin quis. Pork loin pork tenderloin landjaeger turkey boudin. Ham ham hock occaecat bresaola brisket turkey bacon porchetta. Pariatur ut chuck irure. Est hamburger laboris picanha ea, in ribeye fugiat pariatur exercitation ut nisi laborum.",
 }
 
 var cloud = {
@@ -110,7 +112,7 @@ var timeout;
 $(selectLink).hover(
     function() {
     timeout = setTimeout(function() {
-    $("#storyBox").html("Test");}, 100);
+    $("#storyBox").html(link.bio);}, 100);
     },
     function() {
         clearTimeout(timeout);
