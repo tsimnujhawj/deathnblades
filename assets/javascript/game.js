@@ -3,6 +3,7 @@ $(document).ready(function() {
 // Set global variables
 var oldData = $("#storyBox").html();
 var timeout;
+var atkFinished = false;
 
 var attackNarration = [" dashes forward and slashes, inflicting ", " jumps into the air and slams down, dealing ", " swings in a circle and swipes for ", " lunges forward and pierces for ", " roars bloody murder and then attacks in a frenzy fury for ", " slips, but recovers and stabs for ", " drops the weapon while running, but manages to pick up a rock and throws it for "]
 // PLAYER VARIABLES
@@ -442,14 +443,30 @@ $("#attackBtn").on("click", function() {
     } if (player == null) {
         $("#messageBox").html("You need to select a fighter!")
         console.log(player)
-    } else if (haveEnemy === true) {
+    } else if (haveEnemy === true && atkFinished === false) {
         $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
         enemy.hp = enemy.hp - player.atk();
         $("#enemyStats").html(enemy.hp);
+        atkFinished = true; // stop player from being able to attack multiple times
+    } if (enemy.hp <= 0) {
+        console.log("Enemy is dead!");
+        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show(); // TODO: show only the champs not defeated, may need to redesign the show/hide method
+    } else if (atkFinished === true && enemy.hp >= 1) {
+        setTimeout(function(){
+            $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
+          }, 1800);
+          player.hp = player.hp - enemy.atk();
+          $("#playerStatsScreen").html(player.hp);
+          atkFinished = false;
+    } if (player.hp <= 0) {
+        console.log("Player is dead!")
+        // show reset button, something like this...
+        // $("#attackBtn").on("click", function() {
+        // location.reload();
+        // });
     }
-})
+});
 
-// stop player from being able to attack multiple times
 
 // check if enemy hp is below 0, if true remove enemy
 // else if any more enemy exist, if true print pick new enemy
