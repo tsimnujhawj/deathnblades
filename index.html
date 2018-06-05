@@ -63,12 +63,16 @@
 <!-- Player Fight Boxes -->
         <div class="row rowCustom">
             <div class="col-md-6 boxSecChar">
+                    <p id="playerNameScreen"></p>
+                    <p id="playerStatsScreen"></p>
                 <div id="playerImage">
 
                 </div>
             </div>
 
             <div class="col-md-6 boxSecChar">
+                <p id="enemyName"></p>
+                <p id="enemyStats"></p>
                 <div id="enemyImage">
 
                 </div>
@@ -77,7 +81,7 @@
 
 
         <div class="row buttonRow">
-            <div class="col-md-6 boxSec" id="test">
+            <div class="col-md-6 boxSec">
                 <div class="row">
                     <div class="col-md-6">
                             <p id="playerName">Name</p>
@@ -86,18 +90,40 @@
                     <div class="col-md-6">
                             <p>Attack Moves:</p>
                             <div>
-                                <button type="button" class="btn btn-default btn-sm">Attack <i class="fab fa-fulcrum"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" id="attackBtn">Attack <i class="fab fa-fulcrum"></i></button>
                             </div>
                             <div>
-                                <button type="button" class="btn btn-default btn-sm">Special <i class="fas fa-bolt"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" id="specialBtn">Special <i class="fas fa-bolt"></i></button>
                                 <div id="specialEx"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 boxSec">
-                <p id="enemyName">Enemies to Fight:</p>
-                <div id="enemyBox"></div>
+
+            <div class="col-md-6 boxSec" id="enemySelection">
+                    <p id="enemyName">Enemies to Fight:</p>
+                <div class="row characterSelect">
+                        <div class="col-md-4">
+                            <div id="linkEnemy"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="zedEnemy"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="cloudEnemy"></div>
+                        </div>
+                </div>
+                <div class="row characterSelect">
+                        <div class="col-md-4">
+                            <div id="yasuoEnemy"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="twobEnemy"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="ekkoEnemy"></div>
+                        </div>
+                </div>
             </div>
         </div>
 

@@ -69,6 +69,8 @@ var link = {
     icon: "assets/images/link/linkSquare.png",
 
     bio: "The Hero of Time and the wielder of the Triforce of Courage.",
+
+    special: "This is Link's special",
 }
 
 var cloud = {
@@ -138,6 +140,10 @@ var ekko = {
 
 // $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
 
+// $("#attackBtn").on("click", function() {
+// location.reload();
+// });
+
 //////////////////////////////////////////
 
 
@@ -158,16 +164,16 @@ $(selectLink).on("click", function() {
     $("#messageBox").html("You have chosen " + player.name + "!");
     $("#playerStats").append("<img src=" + player.icon + ">");
     $("#playerStats").append("<div>Health: " + player.hp + "</div>")
-    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
-    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
-    // TODO: Need to add custom story? Or would that take too long?
-    $("#storyBox").html("Nice pick! " + player.name + " is a strong champion! Now, select a")
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
+    $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerNameScreen").html(player.name);
 
-    $("#enemyBox").append("<img src=" + zed.icon + ">");
-    $("#enemyBox").append("<img src=" + cloud.icon + ">");
-    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
-    $("#enemyBox").append("<img src=" + twob.icon + ">");
-    $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    $("#zedEnemy").append("<img src=" + zed.icon + ">");
+    $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
+    $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
+    $("#twobEnemy").append("<img src=" + twob.icon + ">");
+    $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
     setHero()
 });
 
@@ -178,15 +184,17 @@ $(selectZed).on("click", function() {
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
     $("#playerStats").append("<img src=" + player.icon + ">");
-    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
-    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
-    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>");
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
+    $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerNameScreen").html(player.name);
 
-    $("#enemyBox").append("<img src=" + link.icon + ">");
-    $("#enemyBox").append("<img src=" + cloud.icon + ">");
-    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
-    $("#enemyBox").append("<img src=" + twob.icon + ">");
-    $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    $("#linkEnemy").append("<img src=" + link.icon + ">");
+    $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
+    $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
+    $("#twobEnemy").append("<img src=" + twob.icon + ">");
+    $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
     setHero()
 });
 
@@ -197,15 +205,17 @@ $(selectCloud).on("click", function() {
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
     $("#playerStats").append("<img src=" + player.icon + ">");
-    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
-    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
-    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>");
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
+    $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerNameScreen").html(player.name);
 
-    $("#enemyBox").append("<img src=" + link.icon + ">");
-    $("#enemyBox").append("<img src=" + zed.icon + ">");
-    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
-    $("#enemyBox").append("<img src=" + twob.icon + ">");
-    $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    $("#linkEnemy").append("<img src=" + link.icon + ">");
+    $("#zedEnemy").append("<img src=" + zed.icon + ">");
+    $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
+    $("#twobEnemy").append("<img src=" + twob.icon + ">");
+    $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
     setHero()
 });
 
@@ -216,15 +226,17 @@ $(selectYasuo).on("click", function() {
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
     $("#playerStats").append("<img src=" + player.icon + ">");
-    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
-    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
-    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>");
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
+    $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerNameScreen").html(player.name);
 
-    $("#enemyBox").append("<img src=" + link.icon + ">");
-    $("#enemyBox").append("<img src=" + zed.icon + ">");
-    $("#enemyBox").append("<img src=" + cloud.icon + ">");
-    $("#enemyBox").append("<img src=" + twob.icon + ">");
-    $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    $("#linkEnemy").append("<img src=" + link.icon + ">");
+    $("#zedEnemy").append("<img src=" + zed.icon + ">");
+    $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
+    $("#twobEnemy").append("<img src=" + twob.icon + ">");
+    $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
     setHero()
 });
 
@@ -235,15 +247,17 @@ $(selectTwob).on("click", function() {
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
     $("#playerStats").append("<img src=" + player.icon + ">");
-    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
-    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
-    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>");
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
+    $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerNameScreen").html(player.name);
 
-    $("#enemyBox").append("<img src=" + link.icon + ">");
-    $("#enemyBox").append("<img src=" + zed.icon + ">");
-    $("#enemyBox").append("<img src=" + cloud.icon + ">");
-    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
-    $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    $("#linkEnemy").append("<img src=" + link.icon + ">");
+    $("#zedEnemy").append("<img src=" + zed.icon + ">");
+    $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
+    $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
+    $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
     setHero()
 });
 
@@ -254,15 +268,17 @@ $(selectEkko).on("click", function() {
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
     $("#playerStats").append("<img src=" + player.icon + ">");
-    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
-    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
-    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>");
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
+    $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerNameScreen").html(player.name);
 
-    $("#enemyBox").append("<img src=" + link.icon + ">");
-    $("#enemyBox").append("<img src=" + zed.icon + ">");
-    $("#enemyBox").append("<img src=" + cloud.icon + ">");
-    $("#enemyBox").append("<img src=" + yasuo.icon + ">");
-    $("#enemyBox").append("<img src=" + twob.icon + ">");
+    $("#linkEnemy").append("<img src=" + link.icon + ">");
+    $("#zedEnemy").append("<img src=" + zed.icon + ">");
+    $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
+    $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
+    $("#twobEnemy").append("<img src=" + twob.icon + ">");
     setHero()
 });
 
@@ -328,28 +344,97 @@ $(selectEkko).hover(
 });
 
 // If player chooses character x then set special button hover
+// to player's special ability
 function setHero(){
     if (player === link) {
-        console.log("test link");
+        $("#attackBtn").on("click", function() {
+            if (enemy === enemy) {
+                console.log("Enemy is here.")
+            }
+        });
+
+        $("#specialEx").html(link.special);
     }
+
     if (player === zed) {
         console.log("test zed")
     }
+
     if (player === cloud) {
         console.log("test cloud")
     }
+
     if (player === yasuo) {
         console.log("test yasuo")
     }
+
     if (player === twob) {
         console.log("test 2b")
     }
+
     if (player === ekko) {
         console.log("test ekko")
     }
+
 };
-// to player's special ability
+
 // add event listener to enemy icons
+$("#linkEnemy").on("click", function() {
+    enemy = link;
+    $("#enemyName").html(enemy.name);
+    $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
+    $("#linkEnemy").hide();
+    $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
+    $("#enemyStats").html("Health: " + enemy.hp);
+    $("#enemySelection").prop("disabled", true); // TODO: disable the buttons for all enemy while battle
+});
+
+$("#zedEnemy").on("click", function() {
+    enemy = zed;
+    $("#enemyName").html(enemy.name);
+    $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
+    $("#zedEnemy").hide();
+    $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
+    $("#enemyStats").html("Health: " + enemy.hp);
+});
+
+$("#cloudEnemy").on("click", function() {
+    enemy = cloud;
+    $("#enemyName").html(enemy.name);
+    $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
+    $("#cloudEnemy").hide();
+    $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
+    $("#enemyStats").html("Health: " + enemy.hp);
+});
+
+$("#yasuoEnemy").on("click", function() {
+    enemy = yasuo;
+    $("#enemyName").html(enemy.name);
+    $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
+    $("#yasuoEnemy").hide();
+    $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
+    $("#enemyStats").html("Health: " + enemy.hp);
+});
+
+$("#twobEnemy").on("click", function() {
+    enemy = twob;
+    $("#enemyName").html(enemy.name);
+    $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
+    $("#twobEnemy").hide();
+    $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
+    $("#enemyStats").html("Health: " + enemy.hp);
+});
+
+$("#ekkoEnemy").on("click", function() {
+    enemy = ekko;
+    $("#enemyName").html(enemy.name);
+    $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
+    $("#ekkoEnemy").hide();
+    $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
+    $("#enemyStats").html("Health: " + enemy.hp);
+});
+
+
 // display character story in story box
 // alert player in message box to pick an enemy
 // if player pick enemy x, hide enemy icon and display proper enemy gif
