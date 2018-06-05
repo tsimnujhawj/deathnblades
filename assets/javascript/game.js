@@ -4,6 +4,7 @@ $(document).ready(function() {
 var oldData = $("#storyBox").html();
 var timeout;
 
+var attackNarration = [" dashes forward and slashes, inflicting ", " jumps into the air and slams down, dealing ", " swings in a circle and swipes for ", " lunges forward and pierces for ", " roars bloody murder and then attacks in a frenzy fury for ", " slips, but recovers and stabs for ", " drops the weapon while running, but manages to pick up a rock and throws it for "]
 // PLAYER VARIABLES
 var eachAtk = 1;
 var player = null;
@@ -433,13 +434,18 @@ $("#ekkoEnemy").on("click", function() {
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
+// ATTACK BUTTON
 $("#attackBtn").on("click", function() {
-    if (haveEnemy === true) {
-        $("#messageBox").html("You have an enemy to fight!")
-    } if (player === null) {
-        $("#messageBox").html("You need to select a fighter!")
-    } else {
+    if (haveEnemy == false) {
         $("#messageBox").html("You need to select an enemy to fight!")
+        console.log(haveEnemy)
+    } if (player == null) {
+        $("#messageBox").html("You need to select a fighter!")
+        console.log(player)
+    } else if (haveEnemy === true) {
+        $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
+        enemy.hp = enemy.hp - player.atk();
+        $("#enemyStats").html(enemy.hp);
     }
 })
 
