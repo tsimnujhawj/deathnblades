@@ -450,7 +450,9 @@ $("#attackBtn").on("click", function() {
         atkFinished = true; // stop player from being able to attack multiple times
     } if (enemy.hp <= 0) {
         console.log("Enemy is dead!");
-        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show(); // TODO: show only the champs not defeated, may need to redesign the show/hide method
+        // TODO: show only the champs not defeated, may need to redesign the show/hide method
+        // run a function that checks if enemy.hp is below 0, if true then do not show
+        showEnemy()
     } else if (atkFinished === true && enemy.hp >= 1) {
         setTimeout(function(){
             $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
@@ -466,6 +468,28 @@ $("#attackBtn").on("click", function() {
         // });
     }
 });
+
+function showEnemy() {
+    if (link.hp <= 0) {
+        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
+        $("#linkEnemy").hide();
+    } if (zed.hp <= 0) {
+        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
+        $("#zedEnemy").hide();
+    } if (cloud.hp <= 0) {
+        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
+        $("#cloudEnemy").hide();
+    } if (yasuo.hp <= 0) {
+        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
+        $("#yasuoEnemy").hide();
+    } if (twob.hp <= 0) {
+        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
+        $("#twobEnemy").hide();
+    } if (ekko.hp <= 0) {
+        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
+        $("#ekkoEnemy").hide();
+    }
+}
 
 
 // check if enemy hp is below 0, if true remove enemy
