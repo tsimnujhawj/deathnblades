@@ -464,7 +464,7 @@ $("#attackBtn").on("click", function() {
             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
         }, 0);
         atkFinished = true;
-        showEnemy()
+        showEnemy();
     } else if (atkFinished === true && enemy.hp >= 1) {
         setTimeout(function(){
             $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
@@ -535,9 +535,13 @@ function showEnemy() {
         }
 }
 
+// TODO: Need to implement this function, where does it fit?
 function checkWin() {
-    if (linkDead === true &&)
-}
+    if (linkDead === true && zedDead === true && cloudDead === true
+        && yasuoDead === true && twobDead === true && ekkoDead === true) {
+        console.log("true");
+    }
+};
 
 // check if enemy hp is below 0, if true remove enemy
 // else if any more enemy exist, if true print pick new enemy
