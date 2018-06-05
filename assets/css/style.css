@@ -21,11 +21,30 @@ h1 {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
+    border-bottom: 3px solid #233237;
+}
+
+#playerName {
+    color: #659843;
+}
+
+#enemyName {
+    color: #754398;
 }
 
 .boxSec {
     background-color: #18121E;
+    color: #439098;
+    border-right: 5px ridge #984B43;
+    border-left: 5px ridge #984B43;
+    border-bottom: 5px ridge #984B43;
+}
+
+.boxSecHeader {
+    background-color: #18121E;
     color: #EAC67A;
+    border: 2px solid #984B43;
+    padding: 20px;
 }
 
 button {
@@ -33,7 +52,7 @@ button {
 }
 
 .container {
-    border: 2px solid #EAC67A;
+    border: 5px ridge #EAC67A;
     margin: 20px auto;
     background-color: #233237;
 }

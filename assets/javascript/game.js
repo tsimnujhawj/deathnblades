@@ -147,6 +147,7 @@ var selectEkko = $("#ekko").html("<img src=" + ekko.icon + ">");
 // TODO: show chosen character icon with stats in #charBox?
 $(selectLink).on("click", function() {
     player = link;
+    $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
@@ -159,6 +160,7 @@ $(selectLink).on("click", function() {
 
 $(selectZed).on("click", function() {
     player = zed;
+    $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
@@ -171,6 +173,7 @@ $(selectZed).on("click", function() {
 
 $(selectCloud).on("click", function() {
     player = cloud;
+    $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
@@ -183,6 +186,7 @@ $(selectCloud).on("click", function() {
 
 $(selectYasuo).on("click", function() {
     player = yasuo;
+    $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
@@ -195,6 +199,7 @@ $(selectYasuo).on("click", function() {
 
 $(selectTwob).on("click", function() {
     player = twob;
+    $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
@@ -207,6 +212,7 @@ $(selectTwob).on("click", function() {
 
 $(selectEkko).on("click", function() {
     player = ekko;
+    $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
