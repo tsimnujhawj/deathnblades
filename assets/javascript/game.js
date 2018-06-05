@@ -6,8 +6,9 @@ var timeout;
 
 // PLAYER VARIABLES
 var eachAtk = 1;
-var player;
+var player = null;
 var enemy;
+var haveEnemy = false;
 
 // Set character objects
 
@@ -135,10 +136,6 @@ var ekko = {
 
 
 // CONSOLE.LOG TEST ///////////////////////
-
-// enemy = link;
-
-// $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
 
 // $("#attackBtn").on("click", function() {
 // location.reload();
@@ -346,18 +343,9 @@ $(selectEkko).hover(
 // If player chooses character x then set special button hover
 // to player's special ability
 function setHero(){
-    if (player === link) {
-        $("#attackBtn").on("click", function() {
-            if (enemy === enemy) {
-                console.log("Enemy is here.")
-            }
-        });
 
-        $("#specialEx").html(link.special);
-    }
-
-    if (player === zed) {
-        console.log("test zed")
+    if (player.hp > 0) {
+        console.log("test");
     }
 
     if (player === cloud) {
@@ -380,60 +368,80 @@ function setHero(){
 
 // add event listener to enemy icons
 $("#linkEnemy").on("click", function() {
+    haveEnemy = true;
     enemy = link;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
     $("#linkEnemy").hide();
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
-    $("#enemySelection").prop("disabled", true); // TODO: disable the buttons for all enemy while battle
+    $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
 $("#zedEnemy").on("click", function() {
+    haveEnemy = true;
     enemy = zed;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
     $("#zedEnemy").hide();
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
+    $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
 $("#cloudEnemy").on("click", function() {
+    haveEnemy = true;
     enemy = cloud;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
     $("#cloudEnemy").hide();
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
+    $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
 $("#yasuoEnemy").on("click", function() {
+    haveEnemy = true;
     enemy = yasuo;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
     $("#yasuoEnemy").hide();
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
+    $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
 $("#twobEnemy").on("click", function() {
+    haveEnemy = true;
     enemy = twob;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
     $("#twobEnemy").hide();
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
+    $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
 $("#ekkoEnemy").on("click", function() {
+    haveEnemy = true;
     enemy = ekko;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
     $("#ekkoEnemy").hide();
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
+    $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
+$("#attackBtn").on("click", function() {
+    if (haveEnemy === true) {
+        $("#messageBox").html("You have an enemy to fight!")
+    } if (player === null) {
+        $("#messageBox").html("You need to select a fighter!")
+    } else {
+        $("#messageBox").html("You need to select an enemy to fight!")
+    }
+})
 
 // display character story in story box
 // alert player in message box to pick an enemy
