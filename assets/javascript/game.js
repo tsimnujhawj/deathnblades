@@ -5,6 +5,15 @@ var oldData = $("#storyBox").html();
 var timeout;
 var atkFinished = false;
 
+// Var for whether enemy characters are dead
+var linkDead = false;
+var zedDead = false;
+var cloudDead = false;
+var yasuoDead = false;
+var twobDead = false;
+var ekkoDead = false;
+
+
 var attackNarration = [" dashes forward and slashes, inflicting ", " jumps into the air and slams down, dealing ", " swings in a circle and swipes for ", " lunges forward and pierces for ", " roars bloody murder and then attacks in a frenzy fury for ", " slips, but recovers and stabs for ", " drops the weapon while running, but manages to pick up a rock and throws it for "]
 // PLAYER VARIABLES
 var eachAtk = 1;
@@ -369,7 +378,7 @@ function setHero(){
 };
 
 // add event listener to enemy icons
-$("#linkEnemy").on("click", function() {
+var enemyLink = $("#linkEnemy").on("click", function() {
     haveEnemy = true;
     enemy = link;
     $("#enemyName").html(enemy.name);
@@ -380,7 +389,7 @@ $("#linkEnemy").on("click", function() {
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
-$("#zedEnemy").on("click", function() {
+var enemyZed = $("#zedEnemy").on("click", function() {
     haveEnemy = true;
     enemy = zed;
     $("#enemyName").html(enemy.name);
@@ -391,7 +400,7 @@ $("#zedEnemy").on("click", function() {
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
-$("#cloudEnemy").on("click", function() {
+var enemyCloud = $("#cloudEnemy").on("click", function() {
     haveEnemy = true;
     enemy = cloud;
     $("#enemyName").html(enemy.name);
@@ -402,7 +411,7 @@ $("#cloudEnemy").on("click", function() {
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
-$("#yasuoEnemy").on("click", function() {
+var enemyYasuo = $("#yasuoEnemy").on("click", function() {
     haveEnemy = true;
     enemy = yasuo;
     $("#enemyName").html(enemy.name);
@@ -413,7 +422,7 @@ $("#yasuoEnemy").on("click", function() {
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
-$("#twobEnemy").on("click", function() {
+var enemyTwob = $("#twobEnemy").on("click", function() {
     haveEnemy = true;
     enemy = twob;
     $("#enemyName").html(enemy.name);
@@ -424,7 +433,7 @@ $("#twobEnemy").on("click", function() {
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
 });
 
-$("#ekkoEnemy").on("click", function() {
+var enemyEkko = $("#ekkoEnemy").on("click", function() {
     haveEnemy = true;
     enemy = ekko;
     $("#enemyName").html(enemy.name);
@@ -448,6 +457,7 @@ $("#attackBtn").on("click", function() {
         enemy.hp = enemy.hp - player.atk();
         $("#enemyStats").html(enemy.hp);
         atkFinished = true; // stop player from being able to attack multiple times
+        console.log(link.hp)
     } if (enemy.hp <= 0) {
         console.log("Enemy is dead!");
         setTimeout(function(){
@@ -476,31 +486,58 @@ $("#attackBtn").on("click", function() {
         setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         }, 0);
+        atkFinished = true;
     }
 });
 
+
 function showEnemy() {
-    if (link.hp <= 0) {
-        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
-        $("#linkEnemy").hide();
-    } if (zed.hp <= 0) {
-        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
-        $("#zedEnemy").hide();
-    } if (cloud.hp <= 0) {
-        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
-        $("#cloudEnemy").hide();
-    } if (yasuo.hp <= 0) {
-        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
-        $("#yasuoEnemy").hide();
-    } if (twob.hp <= 0) {
-        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
-        $("#twobEnemy").hide();
-    } if (ekko.hp <= 0) {
-        $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").show();
-        $("#ekkoEnemy").hide();
-    }
+        if (link.hp <= 0) {
+            $("#linkEnemy").hide();
+            linkDead = true;
+        } else {
+            $("#linkEnemy").show();
+        }
+
+        if (zed.hp <= 0) {
+            $("#zedEnemy").hide();
+            zedDead = true;
+        } else {
+            $("#zedEnemy").show();
+        }
+
+        if (cloud.hp <= 0) {
+            $("#cloudEnemy").hide();
+            cloudDead = true; 
+        } else {
+            $("#cloudEnemy").show();
+        }
+
+        if (yasuo.hp <= 0) {
+            $("#yasuoEnemy").hide();
+            yasuoDead = true;
+        } else {
+            $("#yasuoEnemy").show();
+        }
+
+        if (twob.hp <= 0) {
+            $("#twobEnemy").hide();
+            twobDead = true;
+        } else {
+            $("twobEnemy").show();
+        }
+
+        if (ekko.hp <= 0) {
+            $("#ekkoEnemy").hide();
+            ekkoDead = true;
+        } else {
+            $("#ekkoEnemy").show();
+        }
 }
 
+function checkWin() {
+    if (linkDead === true &&)
+}
 
 // check if enemy hp is below 0, if true remove enemy
 // else if any more enemy exist, if true print pick new enemy
