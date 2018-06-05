@@ -98,7 +98,7 @@ var cloud = {
 
 var twob = {
     name: "2B",
-    hp: 155,
+    hp: 15500,
     atk: function() {
         var atkDmg = 14 * eachAtk;
         return atkDmg;
@@ -450,22 +450,32 @@ $("#attackBtn").on("click", function() {
         atkFinished = true; // stop player from being able to attack multiple times
     } if (enemy.hp <= 0) {
         console.log("Enemy is dead!");
-        // TODO: show only the champs not defeated, may need to redesign the show/hide method
-        // run a function that checks if enemy.hp is below 0, if true then do not show
+        setTimeout(function(){
+            $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
+        }, 0);
+        atkFinished = true;
         showEnemy()
     } else if (atkFinished === true && enemy.hp >= 1) {
         setTimeout(function(){
             $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
-          }, 1800);
+          }, 0);
           player.hp = player.hp - enemy.atk();
           $("#playerStatsScreen").html(player.hp);
           atkFinished = false;
-    } if (player.hp <= 0) {
+    } if (player.hp <= 0 && enemy.hp >= 1) {
+        setTimeout(function(){
+        $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+        }, 0);
+        atkFinished = true;
         console.log("Player is dead!")
         // show reset button, something like this...
         // $("#attackBtn").on("click", function() {
         // location.reload();
         // });
+    } else if (player.hp <=0 && enemy.hp <= 0) {
+        setTimeout(function(){
+            $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+        }, 0);
     }
 });
 
