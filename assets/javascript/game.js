@@ -449,20 +449,8 @@ $("#attackBtn").on("click", function() {
     }
 })
 
-// display character story in story box
-// alert player in message box to pick an enemy
-// if player pick enemy x, hide enemy icon and display proper enemy gif
-// then function an image rotation for enemy characters
-// add new event listener to enemy characters
-// if player clicks on enemy x
-// check if enemy exist in defend box, if true print enemy already exist
-// else if no enemy exist in defend box, appendTo defend box
+// stop player from being able to attack multiple times
 
-// add event listener to attack button
-// upon press, if enemy exist in defend box
-// take player atkDmg and sub it from enemy hp
-// print attack narration to message screen using array and randomly gen index
-// return new hp and atkDmg
 // check if enemy hp is below 0, if true remove enemy
 // else if any more enemy exist, if true print pick new enemy
 // else if no more enemy exist and player's hp is above 1, player wins
