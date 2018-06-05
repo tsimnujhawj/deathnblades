@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 // Set global variables
 var oldData = $("#storyBox").html();
 var timeout;
@@ -27,7 +28,7 @@ var yasuo = {
 
     icon: "assets/images/yasuo/yasuoSquare.png",
 
-    bio: "Spicy jalapeno bacon ipsum dolor amet t-bone tail hamburger pancetta. Buffalo burgdoggen turkey, turducken pastrami alcatra porchetta jowl. Short loin cupim beef ribs porchetta kielbasa filet mignon kevin salami t-bone. Tail turducken shoulder pancetta. Jowl cupim pancetta ribeye kevin swine beef spare ribs capicola tenderloin bacon frankfurter prosciutto fatback meatball. Short loin porchetta kevin, tongue tri-tip bresaola swine t-bone salami. Corned beef fatback sirloin pork loin shank meatloaf pastrami pork belly filet mignon bacon alcatra beef cupim pork.",
+    bio: "An Ionian of deep resolve, Yasuo is an agile swordsman who wields the air itself against his enemies. As a proud young man, he was falsely accused of murdering his master—unable to prove his innocence, he was forced to slay his own brother in self defense. Even after his master’s true killer was revealed, Yasuo still could not forgive himself for all he had done, and now wanders his homeland with only the wind to guide his blade.",
 }
 
 var zed = {
@@ -47,7 +48,7 @@ var zed = {
 
     icon: "assets/images/zed/zedSquare.png",
 
-    bio: "Bresaola capicola strip steak salami corned beef, jerky spare ribs. Tongue shankle andouille, biltong brisket ham hock venison spare ribs turkey drumstick pork belly t-bone strip steak kielbasa. Filet mignon ground round tenderloin jowl sirloin tri-tip spare ribs meatloaf tail picanha. Spare ribs ham ground round pork belly flank, kielbasa tenderloin pastrami cow. Flank short ribs andouille porchetta, bacon buffalo jowl. Chicken tri-tip brisket hamburger, capicola frankfurter t-bone andouille.",
+    bio: "Zed is the first ninja in 200 years to unlock the ancient, forbidden ways. He defied his clan and master, casting off the balance and discipline that had shackled him all his life. Zed now offers power to those who embrace knowledge of the shadows, and slays those who cling to ignorance.",
 }
 
 var link = {
@@ -67,7 +68,7 @@ var link = {
 
     icon: "assets/images/link/linkSquare.png",
 
-    bio: "Tempor ground round kielbasa, ball tip ut in sed. Capicola ut boudin eiusmod anim spare ribs sirloin quis. Pork loin pork tenderloin landjaeger turkey boudin. Ham ham hock occaecat bresaola brisket turkey bacon porchetta. Pariatur ut chuck irure. Est hamburger laboris picanha ea, in ribeye fugiat pariatur exercitation ut nisi laborum.",
+    bio: "The Hero of Time and the wielder of the Triforce of Courage.",
 }
 
 var cloud = {
@@ -87,7 +88,7 @@ var cloud = {
 
     icon: "assets/images/cloud/cloudSquare.jpg",
 
-    bio: "Pastrami porchetta ham short ribs, frankfurter chicken shoulder ball tip beef capicola rump pork chop chuck. Picanha andouille short loin, strip steak meatball filet mignon hamburger beef sausage pork belly salami tri-tip pastrami venison. Flank hamburger rump fatback beef ribs ground round sirloin pork loin shank capicola prosciutto salami ball tip pastrami. Cow pig short loin prosciutto, shankle sirloin pork chop frankfurter pork. Ground round boudin hamburger, t-bone meatball sirloin chuck pig picanha burgdoggen tenderloin shankle cupim turducken fatback.",
+    bio: "An arrogant and proud swordsman at first, Cloud introduces himself to AVALANCHE as a former member of an elite warrior unit called SOLDIER who has turned mercenary, and uninterested in anything beyond his hired task at hand. He later discovers more about his past and, with the help of his friends, learns there is more to being a hero than possessing physical strength and fame, developing compassion for the Planet and people he fights to protect. He fights to protect the Planet against his nemesis, Sephiroth.",
 }
 
 var twob = {
@@ -107,7 +108,7 @@ var twob = {
 
     icon: "assets/images/2b/2bSquare.png",
 
-    bio: "Shankle hamburger tri-tip, pancetta brisket meatloaf beef ribs shoulder venison tail shank pork belly rump short ribs. Jerky kielbasa chuck tongue corned beef doner strip steak porchetta alcatra beef ribs. Chicken leberkas bacon spare ribs, ball tip hamburger jerky frankfurter. Short loin cow ham hamburger chicken picanha porchetta ball tip corned beef meatball spare ribs bresaola meatloaf ham hock short ribs. Pork belly turducken turkey prosciutto picanha porchetta. Filet mignon shank tail pork loin, capicola sausage bacon sirloin alcatra pork buffalo t-bone kevin pancetta.",
+    bio: "YoRHa No.2 Type B (Battle) or 2B is a blade of quiet determination. As a combat android, she does not encourage idle chatter on frivolous subjects and is generally reticent towards others. She also has high respect for the chain of command and rarely questions her orders, unlike her partner. However, 2B occasionally expresses a notably sardonic wit in the face of certain situations and can even be hot-headed at times.",
 }
 
 var ekko = {
@@ -127,7 +128,7 @@ var ekko = {
 
     icon: "assets/images/ekko/ekkoSquare.png",
 
-    bio: "Meatball bresaola shank, ham ham hock rump pastrami shankle ground round filet mignon pork. Capicola brisket hamburger, buffalo tenderloin pancetta landjaeger drumstick. Turkey shank ball tip leberkas corned beef, bacon sausage beef t-bone shoulder porchetta rump capicola. Turducken biltong tenderloin sirloin ham. Leberkas pork belly ham hock, ribeye swine beef ribs cupim ham.",
+    bio: "A prodigy from the rough streets of Zaun, Ekko manipulates time to twist any situation to his advantage. Using his own invention, the Zero Drive, he explores the branching possibilities of reality to craft the perfect moment. Though he revels in this freedom, when there’s a threat to his friends he’ll do anything to defend them. To outsiders, Ekko seems to achieve the impossible the first time, every time.",
 }
 
 
@@ -159,12 +160,15 @@ $(selectLink).on("click", function() {
     $("#playerStats").append("<div>Health: " + player.hp + "</div>")
     $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
     $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+    // TODO: Need to add custom story? Or would that take too long?
+    $("#storyBox").html("Nice pick! " + player.name + " is a strong champion! Now, select a")
 
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
     $("#enemyBox").append("<img src=" + twob.icon + ">");
     $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    setHero()
 });
 
 $(selectZed).on("click", function() {
@@ -183,6 +187,7 @@ $(selectZed).on("click", function() {
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
     $("#enemyBox").append("<img src=" + twob.icon + ">");
     $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    setHero()
 });
 
 $(selectCloud).on("click", function() {
@@ -201,6 +206,7 @@ $(selectCloud).on("click", function() {
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
     $("#enemyBox").append("<img src=" + twob.icon + ">");
     $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    setHero()
 });
 
 $(selectYasuo).on("click", function() {
@@ -219,6 +225,7 @@ $(selectYasuo).on("click", function() {
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
     $("#enemyBox").append("<img src=" + twob.icon + ">");
     $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    setHero()
 });
 
 $(selectTwob).on("click", function() {
@@ -237,6 +244,7 @@ $(selectTwob).on("click", function() {
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
     $("#enemyBox").append("<img src=" + ekko.icon + ">");
+    setHero()
 });
 
 $(selectEkko).on("click", function() {
@@ -255,6 +263,7 @@ $(selectEkko).on("click", function() {
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
     $("#enemyBox").append("<img src=" + twob.icon + ">");
+    setHero()
 });
 
 // Add hover on characters to show stats and story
@@ -265,7 +274,7 @@ $(selectLink).hover(
     },
     function() {
         clearTimeout(timeout);
-        $("#storyBox").html(oldData);
+        // $("#storyBox").html(oldData);
 });
 
 $(selectZed).hover(
@@ -275,7 +284,7 @@ $(selectZed).hover(
     },
     function() {
         clearTimeout(timeout);
-        $("#storyBox").html(oldData);
+        // $("#storyBox").html(oldData);
 });
 
 $(selectCloud).hover(
@@ -285,7 +294,7 @@ $(selectCloud).hover(
     },
     function() {
         clearTimeout(timeout);
-        $("#storyBox").html(oldData);
+        // $("#storyBox").html(oldData);
 });
 
 $(selectYasuo).hover(
@@ -295,7 +304,7 @@ $(selectYasuo).hover(
     },
     function() {
         clearTimeout(timeout);
-        $("#storyBox").html(oldData);
+        // $("#storyBox").html(oldData);
 });
 
 $(selectTwob).hover(
@@ -305,7 +314,7 @@ $(selectTwob).hover(
     },
     function() {
         clearTimeout(timeout);
-        $("#storyBox").html(oldData);
+        // $("#storyBox").html(oldData);
 });
 
 $(selectEkko).hover(
@@ -315,18 +324,36 @@ $(selectEkko).hover(
     },
     function() {
         clearTimeout(timeout);
-        $("#storyBox").html(oldData);
+        // $("#storyBox").html(oldData);
 });
 
-// If player chooses character x then appendTo player box
-// if (player === link) {
-//     $("#enemyBox").html("<img src=" + zed.icon + ">");
-//     $("#enemyBox").html("<img src=" + cloud.icon + ">");
-//     $("#enemyBox").html("<img src=" + yasuo.icon + ">");
-// }
-// then appendTo the other characters to enemy box
+// If player chooses character x then set special button hover
+function setHero(){
+    if (player === link) {
+        console.log("test link");
+    }
+    if (player === zed) {
+        console.log("test zed")
+    }
+    if (player === cloud) {
+        console.log("test cloud")
+    }
+    if (player === yasuo) {
+        console.log("test yasuo")
+    }
+    if (player === twob) {
+        console.log("test 2b")
+    }
+    if (player === ekko) {
+        console.log("test ekko")
+    }
+};
+// to player's special ability
+// add event listener to enemy icons
+// display character story in story box
+// alert player in message box to pick an enemy
+// if player pick enemy x, hide enemy icon and display proper enemy gif
 // then function an image rotation for enemy characters
-// disable event listener to player's character
 // add new event listener to enemy characters
 // if player clicks on enemy x
 // check if enemy exist in defend box, if true print enemy already exist
