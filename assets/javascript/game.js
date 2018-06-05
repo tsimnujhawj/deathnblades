@@ -19,6 +19,7 @@ var yasuo = {
     },
     def: function() {
         var resistance = 5;
+        return resistance;
     },
     imgPlayer: "assets/images/yasuo/yasuo_1.gif",
     
@@ -38,6 +39,7 @@ var zed = {
     },
     def: function() {
         var resistance = 4;
+        return resistance;
     },
     imgPlayer: "assets/images/zed/zed_1.gif",
     
@@ -52,11 +54,12 @@ var link = {
     name: "Link",
     hp: 220,
     atk: function() {
-        var atkDmg = 6 * eachAtk;
+        var atkDmg = 5 * eachAtk;
         return atkDmg;
     },
     def: function() {
         var resistance = 10;
+        return resistance;
     },
     imgPlayer: "assets/images/link/link_1.gif",
     
@@ -76,6 +79,7 @@ var cloud = {
     },
     def: function() {
         var resistance = 7;
+        return resistance;
     },
     imgPlayer: "assets/images/cloud/cloud_1.gif",
 
@@ -95,6 +99,7 @@ var twob = {
     },
     def: function() {
         var resistance = 5;
+        return resistance;
     },
     imgPlayer: "assets/images/2b/2b_1.gif",
     
@@ -114,6 +119,7 @@ var ekko = {
     },
     def: function() {
         var resistance = 8;
+        return resistance;
     },
     imgPlayer: "assets/images/ekko/ekko_1.gif",
     
@@ -143,14 +149,17 @@ var selectTwob = $("#twob").html("<img src=" + twob.icon + ">");
 var selectEkko = $("#ekko").html("<img src=" + ekko.icon + ">");
 
 // Add event listener to characters
-// TODO: remove #charBox hide and hide each individual icon?
-// TODO: show chosen character icon with stats in #charBox?
 $(selectLink).on("click", function() {
     player = link;
     $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#playerStats").append("<img src=" + player.icon + ">");
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
@@ -164,6 +173,11 @@ $(selectZed).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#playerStats").append("<img src=" + player.icon + ">");
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+
     $("#enemyBox").append("<img src=" + link.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
@@ -177,6 +191,11 @@ $(selectCloud).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#playerStats").append("<img src=" + player.icon + ">");
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+
     $("#enemyBox").append("<img src=" + link.icon + ">");
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + yasuo.icon + ">");
@@ -190,6 +209,11 @@ $(selectYasuo).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#playerStats").append("<img src=" + player.icon + ">");
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+
     $("#enemyBox").append("<img src=" + link.icon + ">");
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
@@ -203,6 +227,11 @@ $(selectTwob).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#playerStats").append("<img src=" + player.icon + ">");
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+
     $("#enemyBox").append("<img src=" + link.icon + ">");
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");
@@ -216,6 +245,11 @@ $(selectEkko).on("click", function() {
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
     $("#messageBox").html("You have chosen " + player.name + "!");
+    $("#playerStats").append("<img src=" + player.icon + ">");
+    $("#playerStats").append("<div>Health: " + player.hp + "</div>")
+    $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>")
+    $("#playerStats").append("<div>Defense: " + player.def() + "</div>")
+
     $("#enemyBox").append("<img src=" + link.icon + ">");
     $("#enemyBox").append("<img src=" + zed.icon + ">");
     $("#enemyBox").append("<img src=" + cloud.icon + ">");

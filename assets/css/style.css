@@ -48,7 +48,7 @@ h1 {
 }
 
 button {
-    text-align: center;
+    margin: 8px;
 }
 
 .container {
@@ -80,8 +80,15 @@ button {
 .characterSelect img {
     border: 1px solid #EAC67A;
     border-radius: 3px;
-    margin: 5px auto;
-    display: inline-block;
+}
+
+#playerStats img {
+    border: 1px solid #EAC67A;
+    border-radius: 3px;
+}
+
+#playerStats {
+    color: #EAC67A;
 }
 
 #enemyBox img {
