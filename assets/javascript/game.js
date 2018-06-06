@@ -24,6 +24,7 @@ var timeout;
 var atkFinished = false;
 var haveEnemy = false;
 var enemy;
+var deathMark = 0;
 
 // Var for whether enemy characters are dead
 var linkDead = false;
@@ -37,7 +38,7 @@ var ekkoDead = false;
 var attackNarration = [" dashes forward and slashes, inflicting ", " jumps into the air and slams down, dealing ", " swings in a circle and swipes for ", " lunges forward and pierces for ", " roars bloody murder and then attacks in a frenzy fury for ", " slips, but recovers and stabs for ", " drops the weapon while running, but manages to pick up a rock and throws it for "]
 
 // PLAYER VARIABLES
-var eachAtk = 1;
+var eachAtk = 0;
 var player = null;
 
 // Restart game button
@@ -52,7 +53,7 @@ var yasuo = {
     name: "Yasuo",
     hp: 190,
     atk: function() {
-        var atkDmg = 10 * eachAtk;
+        var atkDmg = 10;
         return atkDmg;
     },
     atkEn: function() {
@@ -76,7 +77,8 @@ var zed = {
     name: "Zed",
     hp: 180,
     atk: function() {
-        var atkDmg = 12 * eachAtk;
+        var atkDmg = 12;
+        deathMark+=1;
         return atkDmg;
     },
     atkEn: function() {
@@ -94,13 +96,21 @@ var zed = {
     icon: "assets/images/zed/zedSquare.png",
 
     bio: "Zed is the first ninja in 200 years to unlock the ancient, forbidden ways. He defied his clan and master, casting off the balance and discipline that had shackled him all his life. Zed now offers power to those who embrace knowledge of the shadows, and slays those who cling to ignorance.",
+
+    specialAttack: function() {
+    var spDmg = 12 * deathMark;
+    deathMark = 1;
+    return spDmg;
+    },
+
+    explain: "<strong>Death Mark</strong><br>Zed's basic attack marks his enemy for critial damage. Each stack of Death Mark grants Zed 12 points of damage. After expelling the mark, Zed needs to rebuild the stack.",
 }
 
 var link = {
     name: "Link",
     hp: 220,
     atk: function() {
-        var atkDmg = 5 * eachAtk;
+        var atkDmg = 5;
         return atkDmg;
     },
     atkEn: function() {
@@ -119,14 +129,19 @@ var link = {
 
     bio: "The Hero of Time and the wielder of the Triforce of Courage.",
 
-    special: "This is Link's special",
+    specialAttack: function() {
+    var spDmg = Math.floor(link.hp / 3 + enemy.hp / 3)
+    return spDmg;
+    },
+
+    explain: "<strong>Triforce of Courage</strong><br>Link taps into the Triforce and deals a massive blow equal to 33% of his current health plus 33% of his target's current health.",
 }
 
 var cloud = {
     name: "Cloud",
     hp: 200,
     atk: function() {
-        var atkDmg = 7 * eachAtk;
+        var atkDmg = 7;
         return atkDmg;
     },
     atkEn: function() {
@@ -150,7 +165,7 @@ var twob = {
     name: "2B",
     hp: 15500,
     atk: function() {
-        var atkDmg = 14 * eachAtk;
+        var atkDmg = 14;
         return atkDmg;
     },
     atkEn: function() {
@@ -174,7 +189,7 @@ var ekko = {
     name: "Ekko",
     hp: 180,
     atk: function() {
-        var atkDmg = 9 * eachAtk;
+        var atkDmg = 9;
         return atkDmg;
     },
     atkEn: function() {
@@ -196,7 +211,7 @@ var ekko = {
 
 
 // CONSOLE.LOG TEST ///////////////////////
-
+// console.log(link.specialAttack())
 
 
 //////////////////////////////////////////
@@ -210,7 +225,7 @@ var selectYasuo = $("#yasuo").html("<img src=" + yasuo.icon + ">");
 var selectTwob = $("#twob").html("<img src=" + twob.icon + ">");
 var selectEkko = $("#ekko").html("<img src=" + ekko.icon + ">");
 
-// Add event listener to characters
+// Add event listener to characters, PICK A CHARACTER
 $(selectLink).on("click", function() {
     player = link;
     linkDead = true;
@@ -230,6 +245,8 @@ $(selectLink).on("click", function() {
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
+
+    $("#specialEx").append(player.explain)
 });
 
 $(selectZed).on("click", function() {
@@ -251,6 +268,8 @@ $(selectZed).on("click", function() {
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
+
+    $("#specialEx").append(player.explain)
 });
 
 $(selectCloud).on("click", function() {
@@ -272,6 +291,8 @@ $(selectCloud).on("click", function() {
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
+
+    $("#specialEx").append(player.explain)
 });
 
 $(selectYasuo).on("click", function() {
@@ -293,6 +314,8 @@ $(selectYasuo).on("click", function() {
     $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
+
+    $("#specialEx").append(player.explain)
 });
 
 $(selectTwob).on("click", function() {
@@ -314,6 +337,8 @@ $(selectTwob).on("click", function() {
     $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
+
+    $("#specialEx").append(player.explain)
 });
 
 $(selectEkko).on("click", function() {
@@ -335,6 +360,8 @@ $(selectEkko).on("click", function() {
     $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
+
+    $("#specialEx").append(player.explain)
 });
 
 // Add hover on characters to show stats and story
@@ -490,12 +517,11 @@ $("#attackBtn").on("click", function() {
         checkWin()
     } else if (atkFinished === true && enemy.hp >= 1) {
         setTimeout(function(){
-        $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
+        $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atkEn() + " points of damage!");
         }, 1000);
-        player.hp = player.hp - enemy.atk();
+        player.hp = player.hp - enemy.atkEn();
         $("#playerStatsScreen").html(player.hp);
         atkFinished = false;
-        eachAtk++;
     } if (player.hp <= 0 && enemy.hp >= 1) {
         $("#attackBtn").off();
         audioElement.pause();
@@ -528,68 +554,69 @@ $("#attackBtn").on("click", function() {
     }
 });
 
-// // SPECIAL ATTACK
-// $("#attackBtn").on("click", function() {
-//     if (haveEnemy == false) {
-//         $("#messageBox").html("You need to select an enemy to fight!")
-//     } if (player == null) {
-//         $("#messageBox").html("You need to select a fighter!")
-//     } else if (haveEnemy === true && atkFinished === false) {
-//         $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
-//         enemy.hp = enemy.hp - player.atk();
-//         $("#enemyStats").html(enemy.hp);
-//         atkFinished = true;
-//     } if (enemy.hp <= 0) {
-//         setTimeout(function(){
-//             // var victoryShort = document.createElement('audio');
-//             // victoryShort.volume = 1.0;
-//             // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
-//             // victoryShort.play();
-//             // audioElement.play();
-//             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
-//         }, 1000);
-//         atkFinished = true;
-//         showEnemy();
-//         checkWin()
-//     } else if (atkFinished === true && enemy.hp >= 1) {
-//         setTimeout(function(){
-//         $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
-//         }, 1000);
-//         player.hp = player.hp - enemy.atk();
-//         $("#playerStatsScreen").html(player.hp);
-//         atkFinished = false;
-//         eachAtk++;
-//     } if (player.hp <= 0 && enemy.hp >= 1) {
-//         $("#attackBtn").off();
-//         audioElement.pause();
-//         var defeatSong = document.createElement('audio');
-//         defeatSong.volume = 1.0;
-//         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
-//         defeatSong.play();
-//         setTimeout(function(){
-//             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-//         }, 1000);
-//         atkFinished = true;
-//         $("#messageBox").on("click", function() {
-//         location.reload();
-//         });
-//     }
-//     else if (player.hp <=0 && enemy.hp <= 0) {
-//         $("#attackBtn").off();
-//         audioElement.pause();
-//         var defeatSong = document.createElement('audio');
-//         defeatSong.volume = 1.0;
-//         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
-//         defeatSong.play();
-//         setTimeout(function(){
-//             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-//         }, 1000);
-//         atkFinished = true;
-//         $("#messageBox").on("click", function() {
-//         location.reload();
-//         });
-//     }
-// });
+// SPECIAL ATTACK
+$("#specialBtn").on("click", function() {
+    if (haveEnemy == false) {
+        $("#messageBox").html("You need to select an enemy to fight!")
+    } if (player == null) {
+        $("#messageBox").html("You need to select a fighter!")
+    } else if (haveEnemy === true && atkFinished === false) {
+        $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.specialAttack() + " points of damage!")
+        enemy.hp = enemy.hp - player.specialAttack();
+        $("#enemyStats").html(enemy.hp);
+        atkFinished = true;
+    } 
+    // if (enemy.hp <= 0) {
+    //     setTimeout(function(){
+    //         // var victoryShort = document.createElement('audio');
+    //         // victoryShort.volume = 1.0;
+    //         // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
+    //         // victoryShort.play();
+    //         // audioElement.play();
+    //         $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
+    //     }, 1000);
+    //     atkFinished = true;
+    //     showEnemy();
+    //     checkWin()
+    // } else if (atkFinished === true && enemy.hp >= 1) {
+    //     setTimeout(function(){
+    //     $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
+    //     }, 1000);
+    //     player.hp = player.hp - enemy.atk();
+    //     $("#playerStatsScreen").html(player.hp);
+    //     atkFinished = false;
+    //     eachAtk++;
+    // } if (player.hp <= 0 && enemy.hp >= 1) {
+    //     $("#attackBtn").off();
+    //     audioElement.pause();
+    //     var defeatSong = document.createElement('audio');
+    //     defeatSong.volume = 1.0;
+    //     defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
+    //     defeatSong.play();
+    //     setTimeout(function(){
+    //         $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+    //     }, 1000);
+    //     atkFinished = true;
+    //     $("#messageBox").on("click", function() {
+    //     location.reload();
+    //     });
+    // }
+    // else if (player.hp <=0 && enemy.hp <= 0) {
+    //     $("#attackBtn").off();
+    //     audioElement.pause();
+    //     var defeatSong = document.createElement('audio');
+    //     defeatSong.volume = 1.0;
+    //     defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
+    //     defeatSong.play();
+    //     setTimeout(function(){
+    //         $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+    //     }, 1000);
+    //     atkFinished = true;
+    //     $("#messageBox").on("click", function() {
+    //     location.reload();
+    //     });
+    // }
+});
 
 
 function showEnemy() {
