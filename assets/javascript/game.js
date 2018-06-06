@@ -166,6 +166,7 @@ var selectEkko = $("#ekko").html("<img src=" + ekko.icon + ">");
 // Add event listener to characters
 $(selectLink).on("click", function() {
     player = link;
+    linkDead = true;
     $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
@@ -187,6 +188,7 @@ $(selectLink).on("click", function() {
 
 $(selectZed).on("click", function() {
     player = zed;
+    zedDead = true;
     $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
@@ -208,6 +210,7 @@ $(selectZed).on("click", function() {
 
 $(selectCloud).on("click", function() {
     player = cloud;
+    cloudDead = true;
     $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
@@ -229,6 +232,7 @@ $(selectCloud).on("click", function() {
 
 $(selectYasuo).on("click", function() {
     player = yasuo;
+    yasuoDead = true;
     $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
@@ -250,6 +254,7 @@ $(selectYasuo).on("click", function() {
 
 $(selectTwob).on("click", function() {
     player = twob;
+    twobDead = true;
     $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
@@ -271,6 +276,7 @@ $(selectTwob).on("click", function() {
 
 $(selectEkko).on("click", function() {
     player = ekko;
+    ekkoDead = true;
     $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
     $("#charBox").hide();
@@ -448,45 +454,43 @@ var enemyEkko = $("#ekkoEnemy").on("click", function() {
 $("#attackBtn").on("click", function() {
     if (haveEnemy == false) {
         $("#messageBox").html("You need to select an enemy to fight!")
-        console.log(haveEnemy)
     } if (player == null) {
         $("#messageBox").html("You need to select a fighter!")
-        console.log(player)
     } else if (haveEnemy === true && atkFinished === false) {
         $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
         enemy.hp = enemy.hp - player.atk();
         $("#enemyStats").html(enemy.hp);
-        atkFinished = true; // stop player from being able to attack multiple times
-        console.log(link.hp)
+        atkFinished = true; // stop player from being able to attack multiple times w/o enemy attack
     } if (enemy.hp <= 0) {
-        console.log("Enemy is dead!");
         setTimeout(function(){
             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
-        }, 0);
+        }, 1000);
         atkFinished = true;
         showEnemy();
+        checkWin()
     } else if (atkFinished === true && enemy.hp >= 1) {
         setTimeout(function(){
             $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
-          }, 0);
+          }, 1000);
           player.hp = player.hp - enemy.atk();
           $("#playerStatsScreen").html(player.hp);
           atkFinished = false;
     } if (player.hp <= 0 && enemy.hp >= 1) {
         setTimeout(function(){
         $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-        }, 0);
+        }, 1000);
         atkFinished = true;
-        console.log("Player is dead!")
-        // show reset button, something like this...
-        // $("#attackBtn").on("click", function() {
-        // location.reload();
-        // });
+        $("#messageBox").on("click", function() {
+        location.reload();
+        });
     } else if (player.hp <=0 && enemy.hp <= 0) {
         setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-        }, 0);
+        }, 1000);
         atkFinished = true;
+        $("#messageBox").on("click", function() {
+        location.reload();
+        });
     }
 });
 
@@ -535,11 +539,17 @@ function showEnemy() {
         }
 }
 
-// TODO: Need to implement this function, where does it fit?
 function checkWin() {
-    if (linkDead === true && zedDead === true && cloudDead === true
-        && yasuoDead === true && twobDead === true && ekkoDead === true) {
-        console.log("true");
+    if (linkDead === true && zedDead === true && cloudDead === true && yasuoDead === true && twobDead === true && ekkoDead === true) {
+        setTimeout(function(){
+            $("#messageBox").html("You have WON! <br> Click HERE to play again!");
+            }, 1000);
+            atkFinished = true;
+            console.log("Player is dead!")
+            // show reset button, something like this...
+            $("#messageBox").on("click", function() {
+            location.reload();
+            });
     }
 };
 
