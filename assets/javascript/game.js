@@ -555,6 +555,8 @@ $("#attackBtn").on("click", function() {
 });
 
 // SPECIAL ATTACK
+// TODO: need to finish the specials, ensure there are limitations on use
+// TODO: fix atkFinished to fit special attacks.
 $("#specialBtn").on("click", function() {
     if (haveEnemy == false) {
         $("#messageBox").html("You need to select an enemy to fight!")
