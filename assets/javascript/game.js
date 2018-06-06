@@ -26,8 +26,10 @@ var spcFinished = false;
 var haveEnemy = false;
 var enemy;
 var deathMark = 0;
+var augmentStack = 0;
 var eachAtk = 0;
 var player = null;
+var mana;
 
 // Var for whether enemy characters are dead
 var linkDead = false;
@@ -52,7 +54,7 @@ $("#restartGame").on("click", function() {
 var yasuo = {
     name: "Yasuo",
     hp: 190,
-    specialMana: 4,
+    specialMana: 8,
     atk: function() {
         var atkDmg = 10;
         return atkDmg;
@@ -74,18 +76,33 @@ var yasuo = {
     bio: "An Ionian of deep resolve, Yasuo is an agile swordsman who wields the air itself against his enemies. As a proud young man, he was falsely accused of murdering his master—unable to prove his innocence, he was forced to slay his own brother in self defense. Even after his master’s true killer was revealed, Yasuo still could not forgive himself for all he had done, and now wanders his homeland with only the wind to guide his blade.",
 
     specialAttack: function() {
-        var spDmg = 80 + (190 - yasuo.hp) * 2
-        yasuo.specialMana--;
-        return spDmg;
+        var spDmg = 80 + (190 - yasuo.hp) * 2;
+        player.specialMana--;
+        return {
+            spDamage: spDmg,
+            mana: player.specialMana,
+            }
         },
     
         explain: "<strong>Last Breath</strong><br>Yasuo conjures a violent tornado that knocks the enemy up, as they are suspended in mid air, Yasuo performs a series of sword dances that deals 80 plus 200% of his missing health.",
+    }
+
+function returnSpValue() {
+    var specialDamage = player.specialAttack();
+    var totalSpDmg = specialDamage.spDamage;
+    return totalSpDmg;
+}
+
+function returnManaValue() {
+    var specialMa = player.specialAttack()
+    var totalMana = specialMa.mana;
+    return totalMana;
 }
 
 var zed = {
     name: "Zed",
     hp: 180,
-    specialMana: 6,
+    specialMana: 10,
     atk: function() {
         var atkDmg = 12;
         deathMark+=1;
@@ -110,7 +127,7 @@ var zed = {
     specialAttack: function() {
     var spDmg = 14 * deathMark;
     deathMark = 0;
-    zed.specialMana--;
+    zed.specialMana;
     return spDmg;
     },
 
@@ -120,6 +137,7 @@ var zed = {
 var link = {
     name: "Link",
     hp: 220,
+    specialMana: 8,
     atk: function() {
         var atkDmg = 5;
         return atkDmg;
@@ -142,6 +160,7 @@ var link = {
 
     specialAttack: function() {
     var spDmg = Math.floor(link.hp / 3 + enemy.hp / 3)
+    link.specialMana--;
     return spDmg;
     },
 
@@ -151,6 +170,7 @@ var link = {
 var cloud = {
     name: "Cloud",
     hp: 200,
+    specialMana: 10,
     atk: function() {
         var atkDmg = 7;
         return atkDmg;
@@ -170,11 +190,20 @@ var cloud = {
     icon: "assets/images/cloud/cloudSquare.jpg",
 
     bio: "An arrogant and proud swordsman at first, Cloud introduces himself to AVALANCHE as a former member of an elite warrior unit called SOLDIER who has turned mercenary, and uninterested in anything beyond his hired task at hand. He later discovers more about his past and, with the help of his friends, learns there is more to being a hero than possessing physical strength and fame, developing compassion for the Planet and people he fights to protect. He fights to protect the Planet against his nemesis, Sephiroth.",
+
+    specialAttack: function() {
+        var spDmg = Math.floor(enemy.hp / 2)
+        cloud.specialMana--;
+        return spDmg;
+        },
+    
+        explain: "<strong>Braver</strong><br>Cloud performs a leaping chop that splits the enemy in two, dealing 50% of the enemy's current health.",
 }
 
 var twob = {
     name: "2B",
     hp: 15500,
+    specialMana: 50,
     atk: function() {
         var atkDmg = 14;
         return atkDmg;
@@ -194,11 +223,21 @@ var twob = {
     icon: "assets/images/2b/2bSquare.png",
 
     bio: "YoRHa No.2 Type B (Battle) or 2B is a blade of quiet determination. As a combat android, she does not encourage idle chatter on frivolous subjects and is generally reticent towards others. She also has high respect for the chain of command and rarely questions her orders, unlike her partner. However, 2B occasionally expresses a notably sardonic wit in the face of certain situations and can even be hot-headed at times.",
+
+    specialAttack: function() {
+        var spDmg = 14 * augmentStack;
+        twob.specialMana--;
+        augmentStack++;
+        return spDmg;
+        },
+    
+        explain: "<strong>Augment</strong><br>2B enhances her weapons and progressively deals more damage with each use.",
 }
 
 var ekko = {
     name: "Ekko",
     hp: 180,
+    specialMana: 5,
     atk: function() {
         var atkDmg = 9;
         return atkDmg;
@@ -218,8 +257,24 @@ var ekko = {
     icon: "assets/images/ekko/ekkoSquare.png",
 
     bio: "A prodigy from the rough streets of Zaun, Ekko manipulates time to twist any situation to his advantage. Using his own invention, the Zero Drive, he explores the branching possibilities of reality to craft the perfect moment. Though he revels in this freedom, when there’s a threat to his friends he’ll do anything to defend them. To outsiders, Ekko seems to achieve the impossible the first time, every time.",
+
+    specialAttack: function() {
+        var ekkoMissingHp = player.hp;
+        var spDmg = ekkoMissingHp;
+        ekko.hp = 180;
+        ekko.specialMana--;
+        return spDmg;
+        },
+    
+        explain: "<strong>Chronobreak</strong><br>Ekko shatters time and rewinds himself back to his former self, restoring his health completely, and dealing damage equal to 100% of his missing health.",
 }
 
+function updateStats() {
+    $("#playerStatsScreen").html("Health: " + player.hp);
+    $("#playerStatsScreen").append("<br>Mana: " + player.specialMana);
+    $("#enemyStats").html(enemy.hp);
+    console.log(player.specialMana);
+};
 
 // CONSOLE.LOG TEST ///////////////////////
 // console.log(link.specialAttack())
@@ -249,6 +304,7 @@ $(selectLink).on("click", function() {
     $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
     $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
     $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerStatsScreen").append("<br>Mana: " + player.specialMana);
     $("#playerNameScreen").html(player.name);
 
     $("#zedEnemy").append("<img src=" + zed.icon + ">");
@@ -272,6 +328,7 @@ $(selectZed).on("click", function() {
     $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
     $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
     $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerStatsScreen").append("<br>Mana: " + player.specialMana);
     $("#playerNameScreen").html(player.name);
 
     $("#linkEnemy").append("<img src=" + link.icon + ">");
@@ -295,6 +352,7 @@ $(selectCloud).on("click", function() {
     $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
     $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
     $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerStatsScreen").append("<br>Mana: " + player.specialMana);
     $("#playerNameScreen").html(player.name);
 
     $("#linkEnemy").append("<img src=" + link.icon + ">");
@@ -318,6 +376,7 @@ $(selectYasuo).on("click", function() {
     $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
     $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
     $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerStatsScreen").append("<br>Mana: " + player.specialMana);
     $("#playerNameScreen").html(player.name);
 
     $("#linkEnemy").append("<img src=" + link.icon + ">");
@@ -341,6 +400,7 @@ $(selectTwob).on("click", function() {
     $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
     $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
     $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerStatsScreen").append("<br>Mana: " + player.specialMana);
     $("#playerNameScreen").html(player.name);
 
     $("#linkEnemy").append("<img src=" + link.icon + ">");
@@ -364,6 +424,7 @@ $(selectEkko).on("click", function() {
     $("#playerStats").append("<div>Attack Damage: " + player.atk() + "</div>");
     $("#playerStats").append("<div>Defense: " + player.def() + "</div>");
     $("#playerStatsScreen").append("Health: " + player.hp);
+    $("#playerStatsScreen").append("<br>Mana: " + player.specialMana);
     $("#playerNameScreen").html(player.name);
 
     $("#linkEnemy").append("<img src=" + link.icon + ">");
@@ -512,7 +573,7 @@ $("#attackBtn").on("click", function() {
     } else if (haveEnemy === true && atkFinished === false) {
         $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
         enemy.hp = enemy.hp - player.atk();
-        $("#enemyStats").html(enemy.hp);
+        updateStats()
         atkFinished = true;
     } if (enemy.hp <= 0) {
         setTimeout(function(){
@@ -531,7 +592,7 @@ $("#attackBtn").on("click", function() {
         $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atkEn() + " points of damage!");
         }, 1000);
         player.hp = player.hp - enemy.atkEn();
-        $("#playerStatsScreen").html(player.hp);
+        updateStats()
         atkFinished = false;
     } if (player.hp <= 0 && enemy.hp >= 1) {
         $("#attackBtn").off();
@@ -567,21 +628,24 @@ $("#attackBtn").on("click", function() {
 
 // SPECIAL ATTACK
 // TODO: need to finish the specials, ensure there are limitations on use (specialMana)
-// TODO: with the addition of Mana, need to build a stat update function
+// TODO: with the addition of Mana, need to build a stat update function to show mana
 
 $("#specialBtn").on("click", function() {
+    updateStats()
     if (haveEnemy == false) {
         $("#messageBox").html("You need to select an enemy to fight!")
     } if (player == null) {
         $("#messageBox").html("You need to select a fighter!")
     } else if (haveEnemy === true && spcFinished === false && player.specialMana >= 1) {
-        $("#messageBox").html(player.name + "'s body is consumed by energy and executes a SPECIAL ATTACK for " + player.specialAttack() + " points of damage!")
-        enemy.hp = enemy.hp - player.specialAttack();
-        $("#enemyStats").html(enemy.hp);
+        $("#messageBox").html(player.name + " is consumed by energy and executes a SPECIAL ATTACK for " + returnSpValue() + " points of damage!")
+        enemy.hp = enemy.hp - returnSpValue();
+        console.log(returnSpValue());
+        updateStats()
         spcFinished = true;
     } 
     if (enemy.hp <= 0) {
         setTimeout(function(){
+            updateStats()
             // var victoryShort = document.createElement('audio');
             // victoryShort.volume = 1.0;
             // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
@@ -597,9 +661,10 @@ $("#specialBtn").on("click", function() {
         $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
         }, 1000);
         player.hp = player.hp - enemy.atk();
-        $("#playerStatsScreen").html(player.hp);
+        updateStats()
         spcFinished = false;
     } if (player.hp <= 0 && enemy.hp >= 1) {
+        updateStats()
         $("#specialBtn").off();
         audioElement.pause();
         var defeatSong = document.createElement('audio');
@@ -609,12 +674,12 @@ $("#specialBtn").on("click", function() {
         setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         }, 1000);
-        atkFinished = true;
         $("#messageBox").on("click", function() {
         location.reload();
         });
     }
     else if (player.hp <=0 && enemy.hp <= 0) {
+        updateStats()
         $("#attackBtn").off();
         audioElement.pause();
         var defeatSong = document.createElement('audio');
@@ -624,7 +689,6 @@ $("#specialBtn").on("click", function() {
         setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         }, 1000);
-        spcFinished = true;
         $("#messageBox").on("click", function() {
         location.reload();
         });
