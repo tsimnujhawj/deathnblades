@@ -22,9 +22,12 @@ $("#pauseMusic").on("click", function() {
 var oldData = $("#storyBox").html();
 var timeout;
 var atkFinished = false;
+var spcFinished = false;
 var haveEnemy = false;
 var enemy;
 var deathMark = 0;
+var eachAtk = 0;
+var player = null;
 
 // Var for whether enemy characters are dead
 var linkDead = false;
@@ -37,9 +40,6 @@ var ekkoDead = false;
 
 var attackNarration = [" dashes forward and slashes, inflicting ", " jumps into the air and slams down, dealing ", " swings in a circle and swipes for ", " lunges forward and pierces for ", " roars bloody murder and then attacks in a frenzy fury for ", " slips, but recovers and stabs for ", " drops the weapon while running, but manages to pick up a rock and throws it for "]
 
-// PLAYER VARIABLES
-var eachAtk = 0;
-var player = null;
 
 // Restart game button
 $("#restartGame").on("click", function() {
@@ -52,6 +52,7 @@ $("#restartGame").on("click", function() {
 var yasuo = {
     name: "Yasuo",
     hp: 190,
+    specialMana: 4,
     atk: function() {
         var atkDmg = 10;
         return atkDmg;
@@ -71,11 +72,20 @@ var yasuo = {
     icon: "assets/images/yasuo/yasuoSquare.png",
 
     bio: "An Ionian of deep resolve, Yasuo is an agile swordsman who wields the air itself against his enemies. As a proud young man, he was falsely accused of murdering his master—unable to prove his innocence, he was forced to slay his own brother in self defense. Even after his master’s true killer was revealed, Yasuo still could not forgive himself for all he had done, and now wanders his homeland with only the wind to guide his blade.",
+
+    specialAttack: function() {
+        var spDmg = 80 + (190 - yasuo.hp) * 2
+        yasuo.specialMana--;
+        return spDmg;
+        },
+    
+        explain: "<strong>Last Breath</strong><br>Yasuo conjures a violent tornado that knocks the enemy up, as they are suspended in mid air, Yasuo performs a series of sword dances that deals 80 plus 200% of his missing health.",
 }
 
 var zed = {
     name: "Zed",
     hp: 180,
+    specialMana: 6,
     atk: function() {
         var atkDmg = 12;
         deathMark+=1;
@@ -98,12 +108,13 @@ var zed = {
     bio: "Zed is the first ninja in 200 years to unlock the ancient, forbidden ways. He defied his clan and master, casting off the balance and discipline that had shackled him all his life. Zed now offers power to those who embrace knowledge of the shadows, and slays those who cling to ignorance.",
 
     specialAttack: function() {
-    var spDmg = 12 * deathMark;
-    deathMark = 1;
+    var spDmg = 14 * deathMark;
+    deathMark = 0;
+    zed.specialMana--;
     return spDmg;
     },
 
-    explain: "<strong>Death Mark</strong><br>Zed's basic attack marks his enemy for critial damage. Each stack of Death Mark grants Zed 12 points of damage. After expelling the mark, Zed needs to rebuild the stack.",
+    explain: "<strong>Death Mark</strong><br>Zed's basic attack marks his enemy for death. Each basic attack builds a stack of Death Mark. When Zed consumes the mark he deals 14 points of damage for each stack.",
 }
 
 var link = {
@@ -555,69 +566,69 @@ $("#attackBtn").on("click", function() {
 });
 
 // SPECIAL ATTACK
-// TODO: need to finish the specials, ensure there are limitations on use
-// TODO: fix atkFinished to fit special attacks.
+// TODO: need to finish the specials, ensure there are limitations on use (specialMana)
+// TODO: with the addition of Mana, need to build a stat update function
+
 $("#specialBtn").on("click", function() {
     if (haveEnemy == false) {
         $("#messageBox").html("You need to select an enemy to fight!")
     } if (player == null) {
         $("#messageBox").html("You need to select a fighter!")
-    } else if (haveEnemy === true && atkFinished === false) {
-        $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.specialAttack() + " points of damage!")
+    } else if (haveEnemy === true && spcFinished === false && player.specialMana >= 1) {
+        $("#messageBox").html(player.name + "'s body is consumed by energy and executes a SPECIAL ATTACK for " + player.specialAttack() + " points of damage!")
         enemy.hp = enemy.hp - player.specialAttack();
         $("#enemyStats").html(enemy.hp);
-        atkFinished = true;
+        spcFinished = true;
     } 
-    // if (enemy.hp <= 0) {
-    //     setTimeout(function(){
-    //         // var victoryShort = document.createElement('audio');
-    //         // victoryShort.volume = 1.0;
-    //         // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
-    //         // victoryShort.play();
-    //         // audioElement.play();
-    //         $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
-    //     }, 1000);
-    //     atkFinished = true;
-    //     showEnemy();
-    //     checkWin()
-    // } else if (atkFinished === true && enemy.hp >= 1) {
-    //     setTimeout(function(){
-    //     $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
-    //     }, 1000);
-    //     player.hp = player.hp - enemy.atk();
-    //     $("#playerStatsScreen").html(player.hp);
-    //     atkFinished = false;
-    //     eachAtk++;
-    // } if (player.hp <= 0 && enemy.hp >= 1) {
-    //     $("#attackBtn").off();
-    //     audioElement.pause();
-    //     var defeatSong = document.createElement('audio');
-    //     defeatSong.volume = 1.0;
-    //     defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
-    //     defeatSong.play();
-    //     setTimeout(function(){
-    //         $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-    //     }, 1000);
-    //     atkFinished = true;
-    //     $("#messageBox").on("click", function() {
-    //     location.reload();
-    //     });
-    // }
-    // else if (player.hp <=0 && enemy.hp <= 0) {
-    //     $("#attackBtn").off();
-    //     audioElement.pause();
-    //     var defeatSong = document.createElement('audio');
-    //     defeatSong.volume = 1.0;
-    //     defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
-    //     defeatSong.play();
-    //     setTimeout(function(){
-    //         $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-    //     }, 1000);
-    //     atkFinished = true;
-    //     $("#messageBox").on("click", function() {
-    //     location.reload();
-    //     });
-    // }
+    if (enemy.hp <= 0) {
+        setTimeout(function(){
+            // var victoryShort = document.createElement('audio');
+            // victoryShort.volume = 1.0;
+            // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
+            // victoryShort.play();
+            // audioElement.play();
+            $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
+        }, 1000);
+        spcFinished = true;
+        showEnemy();
+        checkWin()
+    } else if (spcFinished === true && enemy.hp >= 1) {
+        setTimeout(function(){
+        $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
+        }, 1000);
+        player.hp = player.hp - enemy.atk();
+        $("#playerStatsScreen").html(player.hp);
+        spcFinished = false;
+    } if (player.hp <= 0 && enemy.hp >= 1) {
+        $("#specialBtn").off();
+        audioElement.pause();
+        var defeatSong = document.createElement('audio');
+        defeatSong.volume = 1.0;
+        defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
+        defeatSong.play();
+        setTimeout(function(){
+            $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+        }, 1000);
+        atkFinished = true;
+        $("#messageBox").on("click", function() {
+        location.reload();
+        });
+    }
+    else if (player.hp <=0 && enemy.hp <= 0) {
+        $("#attackBtn").off();
+        audioElement.pause();
+        var defeatSong = document.createElement('audio');
+        defeatSong.volume = 1.0;
+        defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
+        defeatSong.play();
+        setTimeout(function(){
+            $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+        }, 1000);
+        spcFinished = true;
+        $("#messageBox").on("click", function() {
+        location.reload();
+        });
+    }
 });
 
 
