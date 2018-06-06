@@ -1,9 +1,21 @@
 $(document).ready(function() {
 
 // MUSIC PLAYER
+    var audioElement = document.createElement('audio');
+    audioElement.volume = 0.4;
+    audioElement.setAttribute('src', 'assets/sfx/battleOne.mp3');
+    
+    audioElement.addEventListener('ended', function() {
+        this.play();
+    }, false);
 
+$("#playMusic").on("click", function() {
+    audioElement.play();
+    });
 
-// Play music
+$("#pauseMusic").on("click", function() {
+    audioElement.pause();
+    });
 
 
 // Set global variables
@@ -442,6 +454,10 @@ $("#attackBtn").on("click", function() {
         atkFinished = true;
     } if (enemy.hp <= 0) {
         setTimeout(function(){
+            var victoryShort = document.createElement('audio');
+            victoryShort.volume = 1.0;
+            victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
+            victoryShort.play();
             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
         }, 1000);
         atkFinished = true;
@@ -455,6 +471,10 @@ $("#attackBtn").on("click", function() {
           $("#playerStatsScreen").html(player.hp);
           atkFinished = false;
     } if (player.hp <= 0 && enemy.hp >= 1) {
+        var defeatSong = document.createElement('audio');
+        defeatSong.volume = 1.0;
+        defeatSong.setAttribute('src', 'assets/sfx/gameOver.mp3');
+        defeatSong.play();
         setTimeout(function(){
         $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         }, 1000);
@@ -463,6 +483,10 @@ $("#attackBtn").on("click", function() {
         location.reload();
         });
     } else if (player.hp <=0 && enemy.hp <= 0) {
+        var defeatSong = document.createElement('audio');
+        defeatSong.volume = 1.0;
+        defeatSong.setAttribute('src', 'assets/sfx/gameOver.mp3');
+        defeatSong.play();
         setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         }, 1000);
@@ -521,6 +545,10 @@ function showEnemy() {
 function checkWin() {
     if (linkDead === true && zedDead === true && cloudDead === true && yasuoDead === true && twobDead === true && ekkoDead === true) {
         setTimeout(function(){
+            var victorySong = document.createElement('audio');
+            victorySong.volume = 1.0;
+            victorySong.setAttribute('src', 'assets/sfx/gameOver.mp3');
+            victorySong.play();
             $("#messageBox").html("You have WON! <br> Click HERE to play again!");
             }, 1000);
             atkFinished = true;
