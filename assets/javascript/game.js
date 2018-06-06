@@ -631,7 +631,6 @@ $("#attackBtn").on("click", function() {
 // TODO: with the addition of Mana, need to build a stat update function to show mana
 
 $("#specialBtn").on("click", function() {
-    updateStats()
     if (haveEnemy == false) {
         $("#messageBox").html("You need to select an enemy to fight!")
     } if (player == null) {
