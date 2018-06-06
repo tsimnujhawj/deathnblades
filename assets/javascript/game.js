@@ -1,9 +1,17 @@
 $(document).ready(function() {
 
+// MUSIC PLAYER
+
+
+// Play music
+
+
 // Set global variables
 var oldData = $("#storyBox").html();
 var timeout;
 var atkFinished = false;
+var haveEnemy = false;
+var enemy;
 
 // Var for whether enemy characters are dead
 var linkDead = false;
@@ -15,11 +23,16 @@ var ekkoDead = false;
 
 
 var attackNarration = [" dashes forward and slashes, inflicting ", " jumps into the air and slams down, dealing ", " swings in a circle and swipes for ", " lunges forward and pierces for ", " roars bloody murder and then attacks in a frenzy fury for ", " slips, but recovers and stabs for ", " drops the weapon while running, but manages to pick up a rock and throws it for "]
+
 // PLAYER VARIABLES
 var eachAtk = 1;
 var player = null;
-var enemy;
-var haveEnemy = false;
+
+// Restart game button
+$("#restartGame").on("click", function() {
+    location.reload();
+    });
+
 
 // Set character objects
 
@@ -148,9 +161,7 @@ var ekko = {
 
 // CONSOLE.LOG TEST ///////////////////////
 
-// $("#attackBtn").on("click", function() {
-// location.reload();
-// });
+
 
 //////////////////////////////////////////
 
@@ -183,7 +194,6 @@ $(selectLink).on("click", function() {
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
-    setHero()
 });
 
 $(selectZed).on("click", function() {
@@ -205,7 +215,6 @@ $(selectZed).on("click", function() {
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
-    setHero()
 });
 
 $(selectCloud).on("click", function() {
@@ -227,7 +236,6 @@ $(selectCloud).on("click", function() {
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
-    setHero()
 });
 
 $(selectYasuo).on("click", function() {
@@ -249,7 +257,6 @@ $(selectYasuo).on("click", function() {
     $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
-    setHero()
 });
 
 $(selectTwob).on("click", function() {
@@ -271,7 +278,6 @@ $(selectTwob).on("click", function() {
     $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#ekkoEnemy").append("<img src=" + ekko.icon + ">");
-    setHero()
 });
 
 $(selectEkko).on("click", function() {
@@ -293,7 +299,6 @@ $(selectEkko).on("click", function() {
     $("#cloudEnemy").append("<img src=" + cloud.icon + ">");
     $("#yasuoEnemy").append("<img src=" + yasuo.icon + ">");
     $("#twobEnemy").append("<img src=" + twob.icon + ">");
-    setHero()
 });
 
 // Add hover on characters to show stats and story
@@ -356,32 +361,6 @@ $(selectEkko).hover(
         clearTimeout(timeout);
         // $("#storyBox").html(oldData);
 });
-
-// If player chooses character x then set special button hover
-// to player's special ability
-function setHero(){
-
-    if (player.hp > 0) {
-        console.log("test");
-    }
-
-    if (player === cloud) {
-        console.log("test cloud")
-    }
-
-    if (player === yasuo) {
-        console.log("test yasuo")
-    }
-
-    if (player === twob) {
-        console.log("test 2b")
-    }
-
-    if (player === ekko) {
-        console.log("test ekko")
-    }
-
-};
 
 // add event listener to enemy icons
 var enemyLink = $("#linkEnemy").on("click", function() {
@@ -460,7 +439,7 @@ $("#attackBtn").on("click", function() {
         $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
         enemy.hp = enemy.hp - player.atk();
         $("#enemyStats").html(enemy.hp);
-        atkFinished = true; // stop player from being able to attack multiple times w/o enemy attack
+        atkFinished = true;
     } if (enemy.hp <= 0) {
         setTimeout(function(){
             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
@@ -546,22 +525,11 @@ function checkWin() {
             }, 1000);
             atkFinished = true;
             console.log("Player is dead!")
-            // show reset button, something like this...
             $("#messageBox").on("click", function() {
             location.reload();
             });
     }
 };
-
-// check if enemy hp is below 0, if true remove enemy
-// else if any more enemy exist, if true print pick new enemy
-// else if no more enemy exist and player's hp is above 1, player wins
-// else if, player hp is above 1 and enemy exist,
-// take enemy atkDmg and sub it from player hp
-// print attack narration to message screen using array and randomly gen index
-// return new hp
-// check if player hp is below 0, if true player loses
-// if player loses, print death narration and print press play again
 
 
 }); // DOCUMENT READY CLOSING

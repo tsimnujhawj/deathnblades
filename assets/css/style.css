@@ -141,3 +141,16 @@ button {
     padding: 30px;
     height: 450px;
 }
+
+/* Music Player */
+.btn-custom {
+	background-color: black;
+	color:white;
+	transition-property: background, opacity;
+	transition-duration: 0.5s;
+} .btn-custom:hover, .btn-custom:active, .btn-custom:focus {
+	cursor: pointer;
+	opacity:0.5;
+	color:white;
+	background-color:white;
+} 
