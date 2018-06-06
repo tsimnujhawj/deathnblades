@@ -55,6 +55,10 @@ var yasuo = {
         var atkDmg = 10 * eachAtk;
         return atkDmg;
     },
+    atkEn: function() {
+        var atkDmg = 10;
+        return atkDmg;
+    },
     def: function() {
         var resistance = 5;
         return resistance;
@@ -75,6 +79,10 @@ var zed = {
         var atkDmg = 12 * eachAtk;
         return atkDmg;
     },
+    atkEn: function() {
+        var atkDmg = 12;
+        return atkDmg;
+    },
     def: function() {
         var resistance = 4;
         return resistance;
@@ -93,6 +101,10 @@ var link = {
     hp: 220,
     atk: function() {
         var atkDmg = 5 * eachAtk;
+        return atkDmg;
+    },
+    atkEn: function() {
+        var atkDmg = 5;
         return atkDmg;
     },
     def: function() {
@@ -117,6 +129,10 @@ var cloud = {
         var atkDmg = 7 * eachAtk;
         return atkDmg;
     },
+    atkEn: function() {
+        var atkDmg = 7;
+        return atkDmg;
+    },
     def: function() {
         var resistance = 7;
         return resistance;
@@ -137,6 +153,10 @@ var twob = {
         var atkDmg = 14 * eachAtk;
         return atkDmg;
     },
+    atkEn: function() {
+        var atkDmg = 14;
+        return atkDmg;
+    },
     def: function() {
         var resistance = 5;
         return resistance;
@@ -155,6 +175,10 @@ var ekko = {
     hp: 180,
     atk: function() {
         var atkDmg = 9 * eachAtk;
+        return atkDmg;
+    },
+    atkEn: function() {
+        var atkDmg = 9;
         return atkDmg;
     },
     def: function() {
@@ -454,10 +478,11 @@ $("#attackBtn").on("click", function() {
         atkFinished = true;
     } if (enemy.hp <= 0) {
         setTimeout(function(){
-            var victoryShort = document.createElement('audio');
-            victoryShort.volume = 1.0;
-            victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
-            victoryShort.play();
+            // var victoryShort = document.createElement('audio');
+            // victoryShort.volume = 1.0;
+            // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
+            // victoryShort.play();
+            // audioElement.play();
             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
         }, 1000);
         atkFinished = true;
@@ -465,27 +490,33 @@ $("#attackBtn").on("click", function() {
         checkWin()
     } else if (atkFinished === true && enemy.hp >= 1) {
         setTimeout(function(){
-            $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
-          }, 1000);
-          player.hp = player.hp - enemy.atk();
-          $("#playerStatsScreen").html(player.hp);
-          atkFinished = false;
+        $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
+        }, 1000);
+        player.hp = player.hp - enemy.atk();
+        $("#playerStatsScreen").html(player.hp);
+        atkFinished = false;
+        eachAtk++;
     } if (player.hp <= 0 && enemy.hp >= 1) {
+        $("#attackBtn").off();
+        audioElement.pause();
         var defeatSong = document.createElement('audio');
         defeatSong.volume = 1.0;
-        defeatSong.setAttribute('src', 'assets/sfx/gameOver.mp3');
+        defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
         setTimeout(function(){
-        $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+            $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         }, 1000);
         atkFinished = true;
         $("#messageBox").on("click", function() {
         location.reload();
         });
-    } else if (player.hp <=0 && enemy.hp <= 0) {
+    }
+    else if (player.hp <=0 && enemy.hp <= 0) {
+        $("#attackBtn").off();
+        audioElement.pause();
         var defeatSong = document.createElement('audio');
         defeatSong.volume = 1.0;
-        defeatSong.setAttribute('src', 'assets/sfx/gameOver.mp3');
+        defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
         setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
@@ -496,6 +527,69 @@ $("#attackBtn").on("click", function() {
         });
     }
 });
+
+// // SPECIAL ATTACK
+// $("#attackBtn").on("click", function() {
+//     if (haveEnemy == false) {
+//         $("#messageBox").html("You need to select an enemy to fight!")
+//     } if (player == null) {
+//         $("#messageBox").html("You need to select a fighter!")
+//     } else if (haveEnemy === true && atkFinished === false) {
+//         $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
+//         enemy.hp = enemy.hp - player.atk();
+//         $("#enemyStats").html(enemy.hp);
+//         atkFinished = true;
+//     } if (enemy.hp <= 0) {
+//         setTimeout(function(){
+//             // var victoryShort = document.createElement('audio');
+//             // victoryShort.volume = 1.0;
+//             // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
+//             // victoryShort.play();
+//             // audioElement.play();
+//             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
+//         }, 1000);
+//         atkFinished = true;
+//         showEnemy();
+//         checkWin()
+//     } else if (atkFinished === true && enemy.hp >= 1) {
+//         setTimeout(function(){
+//         $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
+//         }, 1000);
+//         player.hp = player.hp - enemy.atk();
+//         $("#playerStatsScreen").html(player.hp);
+//         atkFinished = false;
+//         eachAtk++;
+//     } if (player.hp <= 0 && enemy.hp >= 1) {
+//         $("#attackBtn").off();
+//         audioElement.pause();
+//         var defeatSong = document.createElement('audio');
+//         defeatSong.volume = 1.0;
+//         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
+//         defeatSong.play();
+//         setTimeout(function(){
+//             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+//         }, 1000);
+//         atkFinished = true;
+//         $("#messageBox").on("click", function() {
+//         location.reload();
+//         });
+//     }
+//     else if (player.hp <=0 && enemy.hp <= 0) {
+//         $("#attackBtn").off();
+//         audioElement.pause();
+//         var defeatSong = document.createElement('audio');
+//         defeatSong.volume = 1.0;
+//         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
+//         defeatSong.play();
+//         setTimeout(function(){
+//             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+//         }, 1000);
+//         atkFinished = true;
+//         $("#messageBox").on("click", function() {
+//         location.reload();
+//         });
+//     }
+// });
 
 
 function showEnemy() {
@@ -545,6 +639,7 @@ function showEnemy() {
 function checkWin() {
     if (linkDead === true && zedDead === true && cloudDead === true && yasuoDead === true && twobDead === true && ekkoDead === true) {
         setTimeout(function(){
+            audioElement.pause();
             var victorySong = document.createElement('audio');
             victorySong.volume = 1.0;
             victorySong.setAttribute('src', 'assets/sfx/gameOver.mp3');
@@ -552,7 +647,6 @@ function checkWin() {
             $("#messageBox").html("You have WON! <br> Click HERE to play again!");
             }, 1000);
             atkFinished = true;
-            console.log("Player is dead!")
             $("#messageBox").on("click", function() {
             location.reload();
             });
