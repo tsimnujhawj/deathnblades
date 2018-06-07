@@ -10,4 +10,6 @@ Champion Name | Health | Mana | Attak Damage | Defense | Special Ability | Bio
 
 Champion Name | Information
 ------------ | -------------
-**Link** | The Hero of Time and the wielder of the Triforce of Courage.
+**Link** | Health: 200
+Attack Damage: 8
+The Hero of Time and the wielder of the Triforce of Courage.
