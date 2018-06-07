@@ -118,7 +118,7 @@ var zed = {
 
 var link = {
     name: "Link",
-    hp: 175,
+    hp: 200,
     specialMana: 8,
     atk: function() {
         var atkDmg = 9;
