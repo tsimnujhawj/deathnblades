@@ -7,3 +7,7 @@ In this game you will choose a champion to fight against other champions. Whiche
 Champion Name | Health | Mana | Attak Damage | Defense | Special Ability | Bio
 ------------ | -------------
 **Link** | 200 | 8 | 9 | 10 | **Triforce of Courage** Link taps into the Triforce and deals a massive blow equal to 33% of his current health plus 33% of his target's current health. | The Hero of Time and the wielder of the Triforce of Courage.
+
+Champion Name | Information
+------------ | -------------
+**Link** | The Hero of Time and the wielder of the Triforce of Courage.
