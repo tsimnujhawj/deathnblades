@@ -755,7 +755,7 @@ function checkWin() {
             victorySong.volume = 1.0;
             victorySong.setAttribute('src', 'assets/sfx/victoryLong.mp3');
             victorySong.play();
-            $("#messageBox").html("You have WON! <br> Click HERE to play again!");
+            $("#storyBox").html("You have WON! <br> Click the RESTART button above to play again!");
             
             $("#messageBox").on("click", function() {
             location.reload();
