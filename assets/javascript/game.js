@@ -30,6 +30,7 @@ var augmentStack = 0;
 var eachAtk = 0;
 var player = null;
 var mana;
+var ekkoHeal = 0;
 
 // Var for whether enemy characters are dead
 var linkDead = false;
@@ -47,6 +48,19 @@ var attackNarration = [" dashes forward and slashes, inflicting ", " jumps into 
 $("#restartGame").on("click", function() {
     location.reload();
     });
+
+// Function to retrieve special damage if using return object
+// function returnSpValue() {
+//     var specialDamage = player.specialAttack();
+//     var totalSpDmg = specialDamage.spDamage;
+//     return totalSpDmg;
+// }
+
+// function returnManaValue() {
+//     var specialMa = player.specialAttack()
+//     var totalMana = specialMa.mana;
+//     return totalMana;
+// }
 
 
 // Set character objects
@@ -77,34 +91,20 @@ var yasuo = {
 
     specialAttack: function() {
         var spDmg = 80 + (190 - yasuo.hp) * 2;
-        player.specialMana--;
-        return {
-            spDamage: spDmg,
-            mana: player.specialMana,
-            }
+        // player.specialMana--;
+        return spDmg;
         },
     
         explain: "<strong>Last Breath</strong><br>Yasuo conjures a violent tornado that knocks the enemy up, as they are suspended in mid air, Yasuo performs a series of sword dances that deals 80 plus 200% of his missing health.",
     }
 
-function returnSpValue() {
-    var specialDamage = player.specialAttack();
-    var totalSpDmg = specialDamage.spDamage;
-    return totalSpDmg;
-}
-
-function returnManaValue() {
-    var specialMa = player.specialAttack()
-    var totalMana = specialMa.mana;
-    return totalMana;
-}
 
 var zed = {
     name: "Zed",
     hp: 180,
     specialMana: 10,
     atk: function() {
-        var atkDmg = 12;
+        var atkDmg = 120;
         deathMark+=1;
         return atkDmg;
     },
@@ -127,7 +127,6 @@ var zed = {
     specialAttack: function() {
     var spDmg = 14 * deathMark;
     deathMark = 0;
-    zed.specialMana;
     return spDmg;
     },
 
@@ -160,7 +159,6 @@ var link = {
 
     specialAttack: function() {
     var spDmg = Math.floor(link.hp / 3 + enemy.hp / 3)
-    link.specialMana--;
     return spDmg;
     },
 
@@ -193,7 +191,6 @@ var cloud = {
 
     specialAttack: function() {
         var spDmg = Math.floor(enemy.hp / 2)
-        cloud.specialMana--;
         return spDmg;
         },
     
@@ -226,7 +223,6 @@ var twob = {
 
     specialAttack: function() {
         var spDmg = 14 * augmentStack;
-        twob.specialMana--;
         augmentStack++;
         return spDmg;
         },
@@ -259,25 +255,22 @@ var ekko = {
     bio: "A prodigy from the rough streets of Zaun, Ekko manipulates time to twist any situation to his advantage. Using his own invention, the Zero Drive, he explores the branching possibilities of reality to craft the perfect moment. Though he revels in this freedom, when there’s a threat to his friends he’ll do anything to defend them. To outsiders, Ekko seems to achieve the impossible the first time, every time.",
 
     specialAttack: function() {
-        var ekkoMissingHp = player.hp;
-        var spDmg = ekkoMissingHp;
-        ekko.hp = 180;
-        ekko.specialMana--;
+        var spDmg = 180;
         return spDmg;
         },
     
-        explain: "<strong>Chronobreak</strong><br>Ekko shatters time and rewinds himself back to his former self, restoring his health completely, and dealing damage equal to 100% of his missing health.",
+        explain: "<strong>Chronobreak</strong><br>Ekko shatters time and rewinds himself back to his former self, restoring 100 health, and dealing damage equal to 100% of his missing health.",
 }
 
 function updateStats() {
     $("#playerStatsScreen").html("Health: " + player.hp);
     $("#playerStatsScreen").append("<br>Mana: " + player.specialMana);
-    $("#enemyStats").html(enemy.hp);
-    console.log(player.specialMana);
+    $("#enemyStats").html("Health: " + enemy.hp);
 };
 
+
 // CONSOLE.LOG TEST ///////////////////////
-// console.log(link.specialAttack())
+
 
 
 //////////////////////////////////////////
@@ -499,7 +492,8 @@ $(selectEkko).hover(
 
 // add event listener to enemy icons
 var enemyLink = $("#linkEnemy").on("click", function() {
-    haveEnemy = true;
+    spcFinished = false;
+    atkFinished = false;
     enemy = link;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
@@ -507,10 +501,12 @@ var enemyLink = $("#linkEnemy").on("click", function() {
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
+    haveEnemy = true;
 });
 
 var enemyZed = $("#zedEnemy").on("click", function() {
-    haveEnemy = true;
+        spcFinished = false;
+    atkFinished = false;
     enemy = zed;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
@@ -518,10 +514,12 @@ var enemyZed = $("#zedEnemy").on("click", function() {
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
+    haveEnemy = true;
 });
 
 var enemyCloud = $("#cloudEnemy").on("click", function() {
-    haveEnemy = true;
+        spcFinished = false;
+    atkFinished = false;
     enemy = cloud;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
@@ -529,10 +527,12 @@ var enemyCloud = $("#cloudEnemy").on("click", function() {
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
+    haveEnemy = true;
 });
 
 var enemyYasuo = $("#yasuoEnemy").on("click", function() {
-    haveEnemy = true;
+        spcFinished = false;
+    atkFinished = false;
     enemy = yasuo;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
@@ -540,10 +540,12 @@ var enemyYasuo = $("#yasuoEnemy").on("click", function() {
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
+    haveEnemy = true;
 });
 
 var enemyTwob = $("#twobEnemy").on("click", function() {
-    haveEnemy = true;
+        spcFinished = false;
+    atkFinished = false;
     enemy = twob;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
@@ -551,10 +553,12 @@ var enemyTwob = $("#twobEnemy").on("click", function() {
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
+    haveEnemy = true;
 });
 
 var enemyEkko = $("#ekkoEnemy").on("click", function() {
-    haveEnemy = true;
+        spcFinished = false;
+    atkFinished = false;
     enemy = ekko;
     $("#enemyName").html(enemy.name);
     $("#enemyImage").html("<img src=" + enemy.imgEnemy + ">");
@@ -562,68 +566,68 @@ var enemyEkko = $("#ekkoEnemy").on("click", function() {
     $("#messageBox").html("You have chosen to fight " + enemy.name + "!");
     $("#enemyStats").html("Health: " + enemy.hp);
     $("#linkEnemy, #zedEnemy, #cloudEnemy, #yasuoEnemy, #twobEnemy, #ekkoEnemy").hide();
+    haveEnemy = true;
 });
 
 // ATTACK BUTTON
 $("#attackBtn").on("click", function() {
     if (haveEnemy == false) {
         $("#messageBox").html("You need to select an enemy to fight!")
-    } if (player == null) {
+    }
+    
+    if (player == null) {
         $("#messageBox").html("You need to select a fighter!")
-    } else if (haveEnemy === true && atkFinished === false) {
+    }
+    
+    if (haveEnemy === true && atkFinished === false) {
         $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
         enemy.hp = enemy.hp - player.atk();
-        updateStats()
         atkFinished = true;
-    } if (enemy.hp <= 0) {
-        setTimeout(function(){
-            // var victoryShort = document.createElement('audio');
-            // victoryShort.volume = 1.0;
-            // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
-            // victoryShort.play();
-            // audioElement.play();
+    }
+    
+    if (enemy.hp <= 0) {
             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
-        }, 1000);
         atkFinished = true;
         showEnemy();
         checkWin()
-    } else if (atkFinished === true && enemy.hp >= 1) {
-        setTimeout(function(){
+    }
+    
+    if (atkFinished === true && enemy.hp >= 1) {
         $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atkEn() + " points of damage!");
-        }, 1000);
         player.hp = player.hp - enemy.atkEn();
-        updateStats()
         atkFinished = false;
-    } if (player.hp <= 0 && enemy.hp >= 1) {
+    }
+    
+    if (player.hp <= 0 && enemy.hp >= 1) {
         $("#attackBtn").off();
+        $("#specialBtn").off();
         audioElement.pause();
         var defeatSong = document.createElement('audio');
         defeatSong.volume = 1.0;
         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
-        setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-        }, 1000);
         atkFinished = true;
         $("#messageBox").on("click", function() {
         location.reload();
         });
     }
-    else if (player.hp <=0 && enemy.hp <= 0) {
+
+    if (player.hp <=0 && enemy.hp <= 0) {
         $("#attackBtn").off();
+        $("#specialBtn").off();
         audioElement.pause();
         var defeatSong = document.createElement('audio');
         defeatSong.volume = 1.0;
         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
-        setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-        }, 1000);
         atkFinished = true;
         $("#messageBox").on("click", function() {
         location.reload();
         });
     }
+    updateStats()
 });
 
 // SPECIAL ATTACK
@@ -631,67 +635,68 @@ $("#attackBtn").on("click", function() {
 // TODO: with the addition of Mana, need to build a stat update function to show mana
 
 $("#specialBtn").on("click", function() {
+    if (player.specialMana <= 0) {
+        $("#messageBox").html("You are out of Mana!")
+        $("#specialBtn").off();
+    }
+
     if (haveEnemy == false) {
         $("#messageBox").html("You need to select an enemy to fight!")
-    } if (player == null) {
+    }
+    
+    if (player == null) {
         $("#messageBox").html("You need to select a fighter!")
-    } else if (haveEnemy === true && spcFinished === false && player.specialMana >= 1) {
-        $("#messageBox").html(player.name + " is consumed by energy and executes a SPECIAL ATTACK for " + returnSpValue() + " points of damage!")
-        enemy.hp = enemy.hp - returnSpValue();
-        console.log(returnSpValue());
-        updateStats()
+    }
+    
+    if (haveEnemy === true && spcFinished === false && player.specialMana >= 1) {
+        $("#messageBox").html(player.name + " is consumed by energy and executes a SPECIAL ATTACK for " + player.specialAttack() + " points of damage!")
+        enemy.hp = enemy.hp - player.specialAttack();
+        player.hp += ekkoHeal;
+        player.specialMana--;
         spcFinished = true;
-    } 
+    }
+
     if (enemy.hp <= 0) {
-        setTimeout(function(){
-            updateStats()
-            // var victoryShort = document.createElement('audio');
-            // victoryShort.volume = 1.0;
-            // victoryShort.setAttribute('src', 'assets/sfx/shortVictory.mp3');
-            // victoryShort.play();
-            // audioElement.play();
             $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
-        }, 1000);
         spcFinished = true;
         showEnemy();
         checkWin()
-    } else if (spcFinished === true && enemy.hp >= 1) {
-        setTimeout(function(){
+    }
+    
+    if (spcFinished === true && enemy.hp >= 1) {
         $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
-        }, 1000);
         player.hp = player.hp - enemy.atk();
-        updateStats()
         spcFinished = false;
-    } if (player.hp <= 0 && enemy.hp >= 1) {
-        updateStats()
+    }
+    
+    if (player.hp <= 0 && enemy.hp >= 1) {
+        $("#attackBtn").off();
         $("#specialBtn").off();
         audioElement.pause();
         var defeatSong = document.createElement('audio');
         defeatSong.volume = 1.0;
         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
-        setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-        }, 1000);
         $("#messageBox").on("click", function() {
         location.reload();
         });
     }
-    else if (player.hp <=0 && enemy.hp <= 0) {
-        updateStats()
+
+    if (player.hp <=0 && enemy.hp <= 0) {
         $("#attackBtn").off();
+        $("#specialBtn").off();
         audioElement.pause();
         var defeatSong = document.createElement('audio');
         defeatSong.volume = 1.0;
         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
-        setTimeout(function(){
             $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
-        }, 1000);
         $("#messageBox").on("click", function() {
         location.reload();
         });
     }
+    updateStats()
 });
 
 
@@ -741,15 +746,15 @@ function showEnemy() {
 
 function checkWin() {
     if (linkDead === true && zedDead === true && cloudDead === true && yasuoDead === true && twobDead === true && ekkoDead === true) {
-        setTimeout(function(){
+            $("#attackBtn").off();
+            $("#specialBtn").off();
             audioElement.pause();
             var victorySong = document.createElement('audio');
             victorySong.volume = 1.0;
-            victorySong.setAttribute('src', 'assets/sfx/gameOver.mp3');
+            victorySong.setAttribute('src', 'assets/sfx/victoryLong.mp3');
             victorySong.play();
             $("#messageBox").html("You have WON! <br> Click HERE to play again!");
-            }, 1000);
-            atkFinished = true;
+            
             $("#messageBox").on("click", function() {
             location.reload();
             });
