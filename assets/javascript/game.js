@@ -25,7 +25,7 @@ var atkFinished = false;
 var spcFinished = false;
 var haveEnemy = false;
 var enemy;
-var deathMark = 0;
+var deathMark = 1;
 var augmentStack = 0;
 var eachAtk = 0;
 var player = null;
@@ -91,7 +91,6 @@ var yasuo = {
 
     specialAttack: function() {
         var spDmg = 80 + (190 - yasuo.hp) * 2;
-        // player.specialMana--;
         return spDmg;
         },
     
@@ -102,10 +101,9 @@ var yasuo = {
 var zed = {
     name: "Zed",
     hp: 180,
-    specialMana: 10,
+    specialMana: 12,
     atk: function() {
-        var atkDmg = 120;
-        deathMark+=1;
+        var atkDmg = 12;
         return atkDmg;
     },
     atkEn: function() {
@@ -125,20 +123,19 @@ var zed = {
     bio: "Zed is the first ninja in 200 years to unlock the ancient, forbidden ways. He defied his clan and master, casting off the balance and discipline that had shackled him all his life. Zed now offers power to those who embrace knowledge of the shadows, and slays those who cling to ignorance.",
 
     specialAttack: function() {
-    var spDmg = 14 * deathMark;
-    deathMark = 0;
-    return spDmg;
+        var spDmg = Math.floor(Math.random() * 95) + 30
+        return spDmg;
     },
 
-    explain: "<strong>Death Mark</strong><br>Zed's basic attack marks his enemy for death. Each basic attack builds a stack of Death Mark. When Zed consumes the mark he deals 14 points of damage for each stack.",
+    explain: "<strong>Death Mark</strong><br>Zed becomes a shadow and assassinates his enemy with potential to strike a critical hit (damage 30-95).",
 }
 
 var link = {
     name: "Link",
     hp: 220,
-    specialMana: 8,
+    specialMana: 10,
     atk: function() {
-        var atkDmg = 5;
+        var atkDmg = 7;
         return atkDmg;
     },
     atkEn: function() {
@@ -168,7 +165,7 @@ var link = {
 var cloud = {
     name: "Cloud",
     hp: 200,
-    specialMana: 10,
+    specialMana: 12,
     atk: function() {
         var atkDmg = 7;
         return atkDmg;
@@ -199,8 +196,8 @@ var cloud = {
 
 var twob = {
     name: "2B",
-    hp: 15500,
-    specialMana: 50,
+    hp: 160,
+    specialMana: 12,
     atk: function() {
         var atkDmg = 14;
         return atkDmg;
@@ -233,7 +230,7 @@ var twob = {
 var ekko = {
     name: "Ekko",
     hp: 180,
-    specialMana: 5,
+    specialMana: 12,
     atk: function() {
         var atkDmg = 9;
         return atkDmg;
@@ -255,11 +252,11 @@ var ekko = {
     bio: "A prodigy from the rough streets of Zaun, Ekko manipulates time to twist any situation to his advantage. Using his own invention, the Zero Drive, he explores the branching possibilities of reality to craft the perfect moment. Though he revels in this freedom, when there’s a threat to his friends he’ll do anything to defend them. To outsiders, Ekko seems to achieve the impossible the first time, every time.",
 
     specialAttack: function() {
-        var spDmg = 180;
+        var spDmg = 40;
         return spDmg;
         },
     
-        explain: "<strong>Chronobreak</strong><br>Ekko shatters time and rewinds himself back to his former self, restoring 100 health, and dealing damage equal to 100% of his missing health.",
+        explain: "<strong>Chronobreak</strong><br>Ekko shatters time and rewinds himself back to his former self, restoring 50 health, and dealing 40 points of damage.",
 }
 
 function updateStats() {
@@ -407,6 +404,7 @@ $(selectTwob).on("click", function() {
 
 $(selectEkko).on("click", function() {
     player = ekko;
+    ekkoHeal = 50;
     ekkoDead = true;
     $("#playerName").html(player.name);
     $("#playerImage").html("<img src=" + player.imgPlayer + ">");
@@ -631,9 +629,6 @@ $("#attackBtn").on("click", function() {
 });
 
 // SPECIAL ATTACK
-// TODO: need to finish the specials, ensure there are limitations on use (specialMana)
-// TODO: with the addition of Mana, need to build a stat update function to show mana
-
 $("#specialBtn").on("click", function() {
     if (player.specialMana <= 0) {
         $("#messageBox").html("You are out of Mana!")
@@ -652,6 +647,7 @@ $("#specialBtn").on("click", function() {
         $("#messageBox").html(player.name + " is consumed by energy and executes a SPECIAL ATTACK for " + player.specialAttack() + " points of damage!")
         enemy.hp = enemy.hp - player.specialAttack();
         player.hp += ekkoHeal;
+        console.log(player.specialAttack());
         player.specialMana--;
         spcFinished = true;
     }
@@ -733,7 +729,7 @@ function showEnemy() {
             $("#twobEnemy").hide();
             twobDead = true;
         } else {
-            $("twobEnemy").show();
+            $("#twobEnemy").show();
         }
 
         if (ekko.hp <= 0) {
@@ -760,6 +756,5 @@ function checkWin() {
             });
     }
 };
-
 
 }); // DOCUMENT READY CLOSING
