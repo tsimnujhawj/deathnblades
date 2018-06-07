@@ -113,7 +113,7 @@ var zed = {
         return spDmg;
     },
 
-    explain: "<strong>Death Mark</strong><br>Zed becomes a shadow and assassinates his enemy with potential to strike a critical hit (damage 30-95).",
+    explain: "<strong>Death Mark</strong><br>Zed becomes a shadow and assassinates his enemy with potential to strike a critical hit.",
 }
 
 var link = {
