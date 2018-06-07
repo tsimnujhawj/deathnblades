@@ -11,12 +11,6 @@ h1 {
     text-align: center;
 }
 
-#messageBox {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-}
-
 .buttonRow p {
     text-align: center;
     font-size: 20px;
@@ -98,7 +92,19 @@ button {
     border-radius: 5px;
     padding: 10px;
     text-align: center;
-    height: 90px;
+    height: 100px;
+}
+
+#messageBox {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#messageBoxTwo {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .characterSelect img {

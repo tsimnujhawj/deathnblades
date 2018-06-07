@@ -40,7 +40,7 @@ var yasuoDead = false;
 var twobDead = false;
 var ekkoDead = false;
 
-
+// Array for random narration
 var attackNarration = [" dashes forward and slashes, inflicting ", " jumps into the air and slams down, dealing ", " swings in a circle and swipes for ", " lunges forward and pierces for ", " roars bloody murder and then attacks in a frenzy fury for ", " slips, but recovers and stabs for ", " drops the weapon while running, but manages to pick up a rock and throws it for "]
 
 
@@ -49,22 +49,8 @@ $("#restartGame").on("click", function() {
     location.reload();
     });
 
-// Function to retrieve special damage if using return object
-// function returnSpValue() {
-//     var specialDamage = player.specialAttack();
-//     var totalSpDmg = specialDamage.spDamage;
-//     return totalSpDmg;
-// }
-
-// function returnManaValue() {
-//     var specialMa = player.specialAttack()
-//     var totalMana = specialMa.mana;
-//     return totalMana;
-// }
-
 
 // Set character objects
-
 var yasuo = {
     name: "Yasuo",
     hp: 190,
@@ -570,28 +556,38 @@ var enemyEkko = $("#ekkoEnemy").on("click", function() {
 // ATTACK BUTTON
 $("#attackBtn").on("click", function() {
     if (haveEnemy == false) {
+        setTimeout(function() {
         $("#messageBox").html("You need to select an enemy to fight!")
+        }, 100);
     }
     
     if (player == null) {
+        setTimeout(function() {
         $("#messageBox").html("You need to select a fighter!")
+        }, 100);
     }
     
     if (haveEnemy === true && atkFinished === false) {
+        setTimeout(function() {
         $("#messageBox").html(player.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + player.atk() + " points of damage!")
+        }, 100);
         enemy.hp = enemy.hp - player.atk();
         atkFinished = true;
     }
     
     if (enemy.hp <= 0) {
-            $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
+        setTimeout(function() {
+        $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
+        }, 100);
         atkFinished = true;
         showEnemy();
         checkWin()
     }
     
     if (atkFinished === true && enemy.hp >= 1) {
-        $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atkEn() + " points of damage!");
+        setTimeout(function() {
+        $("#messageBoxTwo").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atkEn() + " points of damage!");
+        }, 100);
         player.hp = player.hp - enemy.atkEn();
         atkFinished = false;
     }
@@ -604,7 +600,7 @@ $("#attackBtn").on("click", function() {
         defeatSong.volume = 1.0;
         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
-            $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+        $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         atkFinished = true;
         $("#messageBox").on("click", function() {
         location.reload();
@@ -619,7 +615,7 @@ $("#attackBtn").on("click", function() {
         defeatSong.volume = 1.0;
         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
-            $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+        $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         atkFinished = true;
         $("#messageBox").on("click", function() {
         location.reload();
@@ -636,31 +632,40 @@ $("#specialBtn").on("click", function() {
     }
 
     if (haveEnemy == false) {
+        setTimeout(function() {
         $("#messageBox").html("You need to select an enemy to fight!")
+        }, 100);
     }
     
     if (player == null) {
+        setTimeout(function() {
         $("#messageBox").html("You need to select a fighter!")
+        }, 100);
     }
     
     if (haveEnemy === true && spcFinished === false && player.specialMana >= 1) {
+        setTimeout(function() {
         $("#messageBox").html(player.name + " is consumed by energy and executes a SPECIAL ATTACK for " + player.specialAttack() + " points of damage!")
+        }, 100);
         enemy.hp = enemy.hp - player.specialAttack();
         player.hp += ekkoHeal;
-        console.log(player.specialAttack());
         player.specialMana--;
         spcFinished = true;
     }
 
     if (enemy.hp <= 0) {
-            $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
+        setTimeout(function() {
+        $("#messageBox").html("You have bested " + enemy.name + " in battle! <br> Select a new challenger!");
+        }, 100);
         spcFinished = true;
         showEnemy();
         checkWin()
     }
     
     if (spcFinished === true && enemy.hp >= 1) {
-        $("#messageBox").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
+        setTimeout(function() {
+        $("#messageBoxTwo").html(enemy.name + attackNarration[Math.floor(Math.random() * attackNarration.length)] + enemy.atk() + " points of damage!");
+        }, 100);
         player.hp = player.hp - enemy.atk();
         spcFinished = false;
     }
@@ -673,7 +678,7 @@ $("#specialBtn").on("click", function() {
         defeatSong.volume = 1.0;
         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
-            $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+        $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         $("#messageBox").on("click", function() {
         location.reload();
         });
@@ -687,7 +692,7 @@ $("#specialBtn").on("click", function() {
         defeatSong.volume = 1.0;
         defeatSong.setAttribute('src', 'assets/sfx/gameOverLong.mp3');
         defeatSong.play();
-            $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
+        $("#messageBox").html("You have been bested in battle. <br> Click HERE to play again!");
         $("#messageBox").on("click", function() {
         location.reload();
         });
@@ -695,7 +700,7 @@ $("#specialBtn").on("click", function() {
     updateStats()
 });
 
-
+// Display enemy icons after winning a battle
 function showEnemy() {
         if (link.hp <= 0) {
             $("#linkEnemy").hide();
@@ -740,6 +745,7 @@ function showEnemy() {
         }
 }
 
+// Check if player has won
 function checkWin() {
     if (linkDead === true && zedDead === true && cloudDead === true && yasuoDead === true && twobDead === true && ekkoDead === true) {
             $("#attackBtn").off();
