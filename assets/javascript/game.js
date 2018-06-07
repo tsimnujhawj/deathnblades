@@ -53,14 +53,14 @@ $("#restartGame").on("click", function() {
 // Set character objects
 var yasuo = {
     name: "Yasuo",
-    hp: 190,
-    specialMana: 8,
+    hp: 165,
+    specialMana: 4,
     atk: function() {
-        var atkDmg = 10;
+        var atkDmg = 16;
         return atkDmg;
     },
     atkEn: function() {
-        var atkDmg = 10;
+        var atkDmg = 16;
         return atkDmg;
     },
     def: function() {
@@ -87,7 +87,7 @@ var yasuo = {
 var zed = {
     name: "Zed",
     hp: 180,
-    specialMana: 12,
+    specialMana: 10,
     atk: function() {
         var atkDmg = 12;
         return atkDmg;
@@ -118,14 +118,14 @@ var zed = {
 
 var link = {
     name: "Link",
-    hp: 220,
-    specialMana: 10,
+    hp: 175,
+    specialMana: 8,
     atk: function() {
-        var atkDmg = 7;
+        var atkDmg = 9;
         return atkDmg;
     },
     atkEn: function() {
-        var atkDmg = 5;
+        var atkDmg = 9;
         return atkDmg;
     },
     def: function() {
@@ -151,13 +151,13 @@ var link = {
 var cloud = {
     name: "Cloud",
     hp: 200,
-    specialMana: 12,
+    specialMana: 8,
     atk: function() {
-        var atkDmg = 7;
+        var atkDmg = 10;
         return atkDmg;
     },
     atkEn: function() {
-        var atkDmg = 7;
+        var atkDmg = 10;
         return atkDmg;
     },
     def: function() {
@@ -173,23 +173,23 @@ var cloud = {
     bio: "An arrogant and proud swordsman at first, Cloud introduces himself to AVALANCHE as a former member of an elite warrior unit called SOLDIER who has turned mercenary, and uninterested in anything beyond his hired task at hand. He later discovers more about his past and, with the help of his friends, learns there is more to being a hero than possessing physical strength and fame, developing compassion for the Planet and people he fights to protect. He fights to protect the Planet against his nemesis, Sephiroth.",
 
     specialAttack: function() {
-        var spDmg = Math.floor(enemy.hp / 2)
+        var spDmg = 77 + enemy.atkEn();
         return spDmg;
         },
     
-        explain: "<strong>Braver</strong><br>Cloud performs a leaping chop that splits the enemy in two, dealing 50% of the enemy's current health.",
+        explain: "<strong>Braver</strong><br>Cloud performs a leaping chop that splits the enemy in two, dealing 77 plus the target's attack damage.",
 }
 
 var twob = {
     name: "2B",
     hp: 160,
-    specialMana: 12,
+    specialMana: 10,
     atk: function() {
-        var atkDmg = 14;
+        var atkDmg = 12;
         return atkDmg;
     },
     atkEn: function() {
-        var atkDmg = 14;
+        var atkDmg = 12;
         return atkDmg;
     },
     def: function() {
@@ -215,8 +215,8 @@ var twob = {
 
 var ekko = {
     name: "Ekko",
-    hp: 180,
-    specialMana: 12,
+    hp: 120,
+    specialMana: 10,
     atk: function() {
         var atkDmg = 9;
         return atkDmg;
