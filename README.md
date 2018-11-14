@@ -3,6 +3,9 @@
 ### About
 In this game you will choose a champion to fight against other champions. Whichever champion you do not choose will become the enemy champions that you have to beat. If you manage to keep your HP above 1 and deal the killing blow to the last enemy champion, you will be victorious. You can restart the game at any time by clicking on the "Restart Game" button at the top right corner. At the top left corner, you can play the battle music and pause it whenever you are tired of it. At the moment, there are six characters you can choose from.
 
+### How to Play
+You can play the game [here](http://tsimnujhawj.com/projects/rpggame/).
+
 Champion Name | About
 ------------ | -------------
 **Link** | The Hero of Time and the wielder of the Triforce of Courage.
