@@ -6,6 +6,8 @@ In this game you will choose a champion to fight against other champions. Whiche
 ### How to Play
 You can play the game [here](http://tsimnujhawj.com/projects/rpggame/).
 
+
+
 Champion Name | About
 ------------ | -------------
 **Link** | The Hero of Time and the wielder of the Triforce of Courage.
