@@ -6,7 +6,9 @@ In this game you will choose a champion to fight against other champions. Whiche
 ### How to Play
 You can play the game [here](http://tsimnujhawj.com/projects/rpggame/).
 
-
+&nbsp;
+&nbsp;
+&nbsp;
 
 Champion Name | About
 ------------ | -------------
