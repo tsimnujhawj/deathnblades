@@ -6,6 +6,10 @@ In this game you will choose a champion to fight against other champions. Whiche
 ### How to Play
 You can play the game [here](http://tsimnujhawj.com/projects/rpggame/).
 
+![Landing page](resources/deathnblades_1.png)
+![Select page](resources/deathnblades_2.png)
+![Combat page](resources/deathnblades_3.png)
+
 &nbsp;
 &nbsp;
 &nbsp;
